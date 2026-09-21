@@ -1,8 +1,8 @@
 ---
 name: kgi-superpy-tw
-description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations for Taiwan stocks, US stocks through sub-brokerage, domestic futures/options, and overseas futures/options. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, and KGI stock/futures workflows including sessions, orders, accounts, quotes, historical data, and backtesting.
+description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, and related trading workflows or workbench design; not for unrelated UI design or strategy profitability advice.
 metadata:
-  version: "1.37.4"
+  version: "1.37.5"
 ---
 
 # KGI SuperPy API
@@ -23,7 +23,8 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 ## Reference routing
 
 - Installation, eligibility, CA, simulation, login, account selection and logout: [session](references/session.md).
-- Building a local SuperPy Web UI, persistent units/OCO, live login output, or application startup/shutdown: [Web OCO application pattern](references/web-oco-application.md). This is a reusable demo design, not an official SDK contract or a required architecture for other integrations.
+- Designing or improving a SuperPy trading interface, strategy workbench, state feedback, alerts or recovery experience: [trading application UI/UX](references/trading-uiux.md). Select the applicable patterns; preserve the user's strategy, execution policy and chosen platform. A small API script does not need a workbench.
+- Implementing a local Web OCO application, persistent units, live login output, or application startup/shutdown: [Web OCO application pattern](references/web-oco-application.md). This concrete case complements the general UI/UX guide; its OCO, inventory and execution rules are not defaults for other strategies or official SDK contracts.
 - Correlated operation/result logs, hidden-launch diagnostics, support bundles and agent troubleshooting: [diagnostics and support](references/diagnostics-support.md).
 - Taiwan acknowledgement latency, pending-only diagnosis and SDK logging: [order lifecycle](references/order-lifecycle.md). Historical cases and field mappings are Taiwan-specific.
 - Quote methods, payloads, subscription keys and quotas: [quotes](references/quotes.md).
@@ -49,4 +50,4 @@ Answer in the user's language while preserving API spelling and dataset names ex
 
 ## Documentation baseline
 
-Revision `1.37.4` prepares the community distribution with a Traditional Chinese introduction and self-contained application references. The manual baseline remains v1.37, reviewed on 2026-09-16. Its release section lists SDK V2.1.2 (2026-09-15), including Python 3.14 support, although the filename ends in `_20260902`. This is a document baseline, not an SDK installation or live compatibility test. See [source identity and conflicts](references/manual-baseline.md).
+Revision `1.37.5` adds strategy-independent trading UI/UX patterns and extends the OCO case with separate execution and reminder states. These are application design recommendations, not new SDK guarantees. The manual baseline remains v1.37, reviewed on 2026-09-16. Its release section lists SDK V2.1.2 (2026-09-15), including Python 3.14 support, although the filename ends in `_20260902`. This is a document baseline, not an SDK installation or live compatibility test. See [source identity and conflicts](references/manual-baseline.md).

@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0f766e" alt="MIT 授權"></a>
-  <img src="https://img.shields.io/badge/Skill-1.37.4-0891b2" alt="Skill 版本 1.37.4">
+  <img src="https://img.shields.io/badge/Skill-1.37.5-0891b2" alt="Skill 版本 1.37.5">
   <img src="https://img.shields.io/badge/社群貢獻-非官方-475569" alt="非官方社群貢獻">
   <img src="https://img.shields.io/badge/README-繁體中文-0f766e" alt="繁體中文 README">
 </p>
@@ -38,6 +38,7 @@
 - **用 AI 開發行情或交易工具**：讓生成的程式有文件依據，少靠名稱猜 API。
 - **從台股擴展到美股或期貨**：先辨認市場差異，再處理委託、帳務與回報。
 - **維護既有 Python 專案**：檢查回呼、委託狀態、斷線恢復與去識別化診斷紀錄。
+- **設計交易介面與策略工作台**：組合狀態呈現、操作回饋、提醒與復原流程，保留自己的策略與買賣執行方式。
 
 > 本專案由社群整理與維護，未受凱基官方背書。這是一套給 AI 助手使用的指引與參考文件；SuperPy SDK、券商服務與開通資格仍由官方提供。安裝 Skill 本身不會連線券商或執行交易。
 
@@ -50,6 +51,7 @@
 | 把「方法回傳」誤當成「已成交」 | 區分方法返回、操作回報、委託狀態與成交證據 |
 | 跨市場時沿用錯誤假設 | 分開整理帳號選擇、數量單位、委託識別與改撤單語意 |
 | 發生問題，只剩一句「送單失敗」 | 提供操作關聯、狀態追蹤、敏感資訊遮蔽與診斷順序的設計參考 |
+| 畫面顯示已連線，卻不知道策略是否在執行 | 分開呈現資料新鮮度、策略狀態與執行模式，提供可組合的交易 UIUX 模式 |
 
 Skill 的作用是提供更有依據的開發脈絡；實際程式仍需依你的 SDK 版本與環境驗證。
 
@@ -140,6 +142,15 @@ python -m pip install kgisuperpy
 請區分可證實事實、推論與缺少的證據，提出查核步驟，不自動重送。
 ```
 
+**交易工作台 UIUX**
+
+```text
+請使用 $kgi-superpy-tw，改善我的 SuperPy 定期買入工作台。
+保留既有排程與委託方式，整理登入進度、資料狀態、執行紀錄、提醒與重啟流程。
+請區分策略狀態與是否允許自動送單，說明停用按鈕的原因與下一步。
+先提出介面設計與展示驗證情境，不登入券商或執行交易。
+```
+
 <a id="coverage"></a>
 
 ## 一份 Skill，按四個市場分別理解
@@ -151,7 +162,9 @@ python -m pip install kgisuperpy
 | 國內期貨／選擇權 | `FutOrder`／`FutAccount`、`FutQuote`、原始行情與歷史資料 | 行情別名與實際交易契約需分開處理 |
 | 海外期貨／選擇權 | `OvfutOrder`／`OvfutAccount`、商品契約與回報 | 此 Skill 尚未建立海外行情／歷史資料介面的文件契約 |
 
-另提供台股本機 Web UI、OCO（停損／停利擇一觸發）、資料保存、重連與診斷紀錄的**設計參考**。這些內容沒有附可直接啟動的交易應用，也不代表券商端提供 OCO 服務。
+另提供可組合的 [交易應用 UIUX 指南](references/trading-uiux.md)：從登入進度、資料新鮮度、策略摘要，到操作確認、提醒與復原。可依人工交易、定期執行或其他策略的需求選用；不要求固定三欄、OCO 或特定買賣方式。
+
+台股本機 Web OCO（停損／停利擇一觸發）作為具體案例，說明整張／零股、庫存不足時僅提醒、資料保存及重連等設計。這些內容沒有附可直接啟動的交易應用，不代表 SDK 提供排程、網格或券商端 OCO 服務。
 
 <a id="references"></a>
 
@@ -167,6 +180,7 @@ python -m pip install kgisuperpy
 | 美股、國內期權、海外期權 | [美股複委託](references/us-stocks.md) · [國內期權](references/domestic-futures.md) · [海外期權](references/overseas-futures.md) |
 | 行情訂閱、回呼、錯誤與恢復 | [行情](references/quotes.md) · [行情事件](references/quote-events.md) |
 | 歷史資料、MSMP 與回測 | [資料與回測](references/data-and-backtest.md) |
+| 通用交易介面、策略狀態與操作回饋 | [交易應用 UIUX 指南](references/trading-uiux.md) |
 | 本機交易工具與可追查紀錄 | [Web OCO 設計參考](references/web-oco-application.md) · [診斷與支援](references/diagnostics-support.md) |
 | 文件版本、矛盾與來源 | [手冊基準](references/manual-baseline.md) · [官方連結索引](references/official-index.md) |
 
@@ -174,7 +188,7 @@ README 與使用情境採繁體中文；部分技術參考採英文，保留 API
 
 ## 版本與使用邊界
 
-- **Skill 版本：`1.37.4`。** 文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
+- **Skill 版本：`1.37.5`。** 本版新增通用交易 UIUX 指南，並擴充 OCO 案例的零股與僅提醒狀態；內容屬應用設計建議。文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
 - **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
 - **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
 - **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。

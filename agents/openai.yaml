@@ -1,6 +1,6 @@
 interface:
   display_name: "KGI SuperPy API · 台股／美股／期貨"
-  short_description: "社群整理的凱基 SuperPy API 指引，協助開發台股、美股與期貨應用"
+  short_description: "社群整理的凱基 SuperPy API 與交易 UIUX 指引，協助開發台股、美股與期貨應用"
   default_prompt: "請使用 $kgi-superpy-tw，依 v1.37 手冊基準協助我開發指定市場的 SuperPy 流程，並以繁體中文說明文件依據與待確認事項。"
 policy:
   allow_implicit_invocation: true
