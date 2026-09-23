@@ -112,7 +112,7 @@ def re_login():
 api.set_disconnect_cb(re_login)
 ```
 
-The callback receives no documented argument. The official example calls `api.login()` on the existing instance. This is trading-session recovery, separate from quote resubscription. In an application, apply a finite reconnect budget, retain account context, and reconcile pending orders; never replay unknown orders as a consequence of reconnect.
+The callback receives no documented argument. The official example calls `api.login()` on the existing instance. This is trading-session recovery, separate from quote resubscription. In an application, apply the product retry policy with capped exponential backoff and an explicit stop on logout/shutdown; a user-requested persistent mode may retry without an attempt limit. Retain account context and reconcile pending orders; never replay unknown orders as a consequence of reconnect.
 
 ## Official pages
 
