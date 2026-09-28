@@ -40,6 +40,8 @@ Do not add Taiwan `odd_lot`, `order_cond`, `time_in_force` or a market-price enu
 
 ## Identity and state differences
 
+For missing order numbers, rejected orders, callback/cache versus broker-query evidence, `errMsg.ini`, cancellation confirmation and guarded user retries, see [US order diagnostics](us-order-diagnostics.md).
+
 `Trade` still contains `order`, `order_status`, `operations`, but its schema differs from Taiwan:
 
 - `Order.org_seqnum`: original order identity for management; `Order.order_id`: order number after success. Preserve both.

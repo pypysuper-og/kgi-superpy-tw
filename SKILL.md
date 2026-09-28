@@ -2,7 +2,7 @@
 name: kgi-superpy-tw
 description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, and related trading workflows or workbench design; not for unrelated UI design or strategy profitability advice.
 metadata:
-  version: "1.37.8"
+  version: "1.37.9"
 ---
 
 # KGI SuperPy API
@@ -27,6 +27,7 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 - Implementing OCO-specific persistent units, inventory reconciliation or reminder behavior in a local Web application: [Web OCO application example](references/web-oco-application.md). Its OCO and execution rules are examples, not defaults for other strategies or official SDK contracts; shared login, shutdown and layout requirements live in the UX guide.
 - Correlated operation/result logs, hidden-launch diagnostics, support bundles and agent troubleshooting: [diagnostics and support](references/diagnostics-support.md).
 - Taiwan acknowledgement latency, pending-only diagnosis and SDK logging: [order lifecycle](references/order-lifecycle.md). Historical cases and field mappings are Taiwan-specific.
+- US sub-brokerage missing identifiers, rejection codes, order queries, cancellation confirmation and explicit user retries: [US order diagnostics](references/us-order-diagnostics.md). Distinguish callback, SDK cache, broker reports and the application's ledger.
 - Quote methods, payloads, subscription keys and quotas: [quotes](references/quotes.md).
 - Quote event enums, error codes and bounded recovery: [quote events](references/quote-events.md).
 - Historical data, MSMP conversion, freshness and backtesting: [data and backtest](references/data-and-backtest.md).
@@ -50,6 +51,8 @@ Answer in the user's language while preserving API spelling and dataset names ex
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
+
+Revision `1.37.9` adds US order diagnostics: asynchronous Trade identity, full broker order reports, error messages and `errMsg.ini`, unresolved cancellation at shutdown, and guarded explicit retries. SDK implementation observations are version-specific to 2.1.2; these instructions do not establish live-broker verification.
 
 Revision `1.37.8` integrates Taiwan whole-lot/odd-lot source and order separation with Windows windowless startup guidance. Local Web entrypoints should leave no persistent console, preserve streamed login feedback and sanitized audit, and expose startup failures. This is application guidance, not a bundled launcher or live-broker certification.
 
