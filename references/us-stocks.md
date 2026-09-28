@@ -40,7 +40,7 @@ Do not add Taiwan `odd_lot`, `order_cond`, `time_in_force` or a market-price enu
 
 ## Identity and state differences
 
-For missing order numbers, rejected orders, callback/cache versus broker-query evidence, `errMsg.ini`, cancellation confirmation and guarded user retries, see [US order diagnostics](us-order-diagnostics.md).
+For missing order numbers, rejected orders, callback/cache versus broker-query evidence, `errMsg.ini`, cancellation confirmation and guarded user retries, see [US order diagnostics](us-order-diagnostics.md). That guide also covers matched-but-empty cache states, automatic/manual reconciliation, timestamp quality, and preserving per-order settlement when strategy settings change.
 
 `Trade` still contains `order`, `order_status`, `operations`, but its schema differs from Taiwan:
 
