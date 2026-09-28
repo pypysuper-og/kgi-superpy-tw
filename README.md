@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0f766e" alt="MIT 授權"></a>
-  <img src="https://img.shields.io/badge/Skill-1.37.7-0891b2" alt="Skill 版本 1.37.7">
+  <img src="https://img.shields.io/badge/Skill-1.37.8-0891b2" alt="Skill 版本 1.37.8">
   <img src="https://img.shields.io/badge/社群貢獻-非官方-475569" alt="非官方社群貢獻">
   <img src="https://img.shields.io/badge/README-繁體中文-0f766e" alt="繁體中文 README">
 </p>
@@ -201,9 +201,9 @@ README 與使用情境採繁體中文；部分技術參考採英文，保留 API
 
 ## 版本與使用邊界
 
-本版將 Web 指南重整為六項 UX 契約：功能收納、登入／結束、連線／重連、就地說明、完整稽核，以及訂閱後的最新成交價展示。提供設計與驗證建議，不附已完成訂閱整合的 Web 程式。
+本版整合台股整張／盤中零股的行情與委託隔離指引，並補足 Windows 本機 Web 隱藏啟動：不常駐 CMD／PowerShell 視窗，保留登入輸出、稽核與啟動失敗提示。Web 指南延續六項 UX 契約：功能收納、登入／結束、連線／重連、就地說明、完整稽核，以及訂閱後的最新成交價展示。提供設計與驗證建議，不附已完成訂閱整合的 Web 程式。
 
-- **Skill 版本：`1.37.7`。** 先前版本新增通用交易 UIUX 指南，並擴充 OCO 案例的零股與僅提醒狀態；內容屬應用設計建議。文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
+- **Skill 版本：`1.37.8`。** 先前版本明確補充整張／零股的行情、策略卡片、監控與出場委託隔離規則；延續通用交易 UIUX 指南與 OCO 僅提醒案例。文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
 - **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
 - **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
 - **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。

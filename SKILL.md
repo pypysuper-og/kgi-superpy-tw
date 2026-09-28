@@ -2,7 +2,7 @@
 name: kgi-superpy-tw
 description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, and related trading workflows or workbench design; not for unrelated UI design or strategy profitability advice.
 metadata:
-  version: "1.37.7"
+  version: "1.37.8"
 ---
 
 # KGI SuperPy API
@@ -44,12 +44,15 @@ Answer in the user's language while preserving API spelling and dataset names ex
 - Register the relevant order callback before submitting. A returned `Trade`, pending operation, acknowledged new order and fill are distinct observations. On an unknown outcome, reconcile using that market's reports; do not resend automatically.
 - `update_order(..., qty=N)` reduces quantity by N, not to N. Supply either price or qty, not both, and do not reduce beyond the remaining quantity. US modification is cancel-and-replace; preserve both operation histories.
 - Quantity and identifier semantics differ by market and surface. Do not transfer backtest share quantities into Taiwan lot orders, US `org_seqnum` into Taiwan order IDs, or a futures quote alias into a dated trading contract.
+- Keep Taiwan whole-lot and intraday odd-lot strategy data and orders separate through monitoring, reminders, exit and recovery. Use the strategy's own trading mode, not the currently selected UI product; never substitute another mode's quote when data is missing. See [quote separation](references/quotes.md#keep-taiwan-whole-lot-and-intraday-odd-lot-data-separate) and [orders](references/orders.md).
 - Processed quote events, `SWQuote` events and order events have different fields. Raw `SWMarketData.data_type` identifies the updated group; other values may be stale from the prior update.
 - Read exact dataset names and arguments from the appropriate `get_table()` catalog. Historical update schedules are expected processing times, not proof of freshness or an SLA.
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
 
+Revision `1.37.8` integrates Taiwan whole-lot/odd-lot source and order separation with Windows windowless startup guidance. Local Web entrypoints should leave no persistent console, preserve streamed login feedback and sanitized audit, and expose startup failures. This is application guidance, not a bundled launcher or live-broker certification.
+
 Revision `1.37.7` centers the Web guidance on six user-facing workflows: workspace organization, login/shutdown, session and reconnect feedback, contextual help, auditable lifecycles, and latest-trade display from verified subscriptions. This is design guidance, not a shipped Web application or evidence of live market-data integration.
 
-Revision `1.37.5` adds strategy-independent trading UI/UX patterns and extends the OCO case with separate execution and reminder states. These are application design recommendations, not new SDK guarantees. The manual baseline remains v1.37, reviewed on 2026-09-16. Its release section lists SDK V2.1.2 (2026-09-15), including Python 3.14 support, although the filename ends in `_20260902`. This is a document baseline, not an SDK installation or live compatibility test. See [source identity and conflicts](references/manual-baseline.md).
+Revision `1.37.6` makes Taiwan whole-lot/odd-lot separation explicit across quote caches, strategy cards, monitoring and exit orders. Revision `1.37.5` added strategy-independent trading UI/UX patterns and the OCO reminder case. These are application design recommendations, not new SDK guarantees. The manual baseline remains v1.37, reviewed on 2026-09-16. Its release section lists SDK V2.1.2 (2026-09-15), including Python 3.14 support, although the filename ends in `_20260902`. This is a document baseline, not an SDK installation or live compatibility test. See [source identity and conflicts](references/manual-baseline.md).

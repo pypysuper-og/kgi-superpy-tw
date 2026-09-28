@@ -84,6 +84,8 @@ credit = api.Order.TSECreditInfo("2330")
 
 The create-order table calls qty a stock quantity without an explicit lot-unit guarantee. Common examples use qty=1 or 5; do not multiply by 1000 from an inventory or backtest schema. Consult [lifecycle quantity notes](order-lifecycle.md) if the distinction affects a live operation.
 
+For a strategy trading Taiwan whole lots or intraday odd lots, retain its trading mode independently of the current UI selection. An intraday odd-lot entry/position must monitor odd-lot data and submit its exit with `kgi.OddLot.Odd`; a whole-lot strategy uses whole-lot data and `kgi.OddLot.Common` for its exit. Preserve each order's quantity unit and mode in reports and recovery, even if inventory comparisons normalize to shares. See [quote separation](quotes.md#keep-taiwan-whole-lot-and-intraday-odd-lot-data-separate). This rule does not equate `Odd` with after-market odd lots or authorize an unsupported price/time-in-force combination.
+
 `MARGIN_DayTrade` and `SHORT_DayTrade` appear in returned-object enum tables but not in the create-order accepted-input list. Do not promote them to accepted order inputs without target-version confirmation. `Action.Sell` is a sell direction; short-sale semantics also depend on order condition and holdings.
 
 ## Object model

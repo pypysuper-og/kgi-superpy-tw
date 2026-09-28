@@ -38,7 +38,8 @@ command_received(command_id, create, safe_parameters)
 - actor 初始化或執行時崩潰也要留下錯誤類型與位置，拒收後續命令，並在 UI 顯示工作執行緒已停止；不能只讓 daemon thread 的 traceback 消失在隱藏視窗裡。
 - 啟動記錄 Python 與來源指紋；支援封裝可附套件版本。收集時的版本／source 與故障時執行的版本可能不同，先核對，不把目前磁碟檔案當成當時執行證據。
 - 日誌寫入故障應可見。補充診斷檔失敗不能把已獲接受的交易重新分類成未送出而重試；關鍵交易意圖／成交仍由資料庫保存。
-- 隱藏啟動應配合 log 與啟動失敗提示。可用 `start.cmd → start.vbs → PowerShell hidden → pythonw`，但 `.cmd` 初始外殼可能瞬間閃過；直接用 `.vbs` 可省去外殼。`pythonw` 不表示 SDK 的任意原生輸出已自動保存。
+- Windows 本機 Web 的正常啟動不得留下可見的 CMD／PowerShell／Python 視窗；包含環境準備子程序。互動 CLI／除錯終端依使用者要求保留。不要靠終止使用中的交易程序來隱藏視窗。
+- 隱藏啟動應配合 log 與啟動失敗提示。可用 `start.cmd → start.vbs → PowerShell hidden → pythonw`，但 `.cmd` 初始外殼可能瞬間閃過；直接用 `.vbs` 可省去外殼。`pythonw` 不表示 SDK 的任意原生輸出已自動保存；要補足可寫的 stdout／stderr，維持 Web 登入輸出及遮蔽稽核。對非必要原生输出可丟棄，但不可把未遮蔽內容存成診断檔。啟動事件可記錄程序 ID、是否使用 pythonw、是否附加主控台，失敗只記階段／錯誤類型，不存憑證、完整環境或原始SDK例外。
 - 缺少最後一筆 log 可能是斷電、強制結束、寫入失敗或通訊中斷，不能直接推論是哪一種。沒有 server_ready、沒有 started、沒有 finished 是不同證據缺口。
 - 前端可回報有限類型的 client_event（network、command_error、timeout、script_error）及 command_id，不傳整個 state 或原始錯誤物件；後端已不可達時，回報本身也可能無法保存。
 

@@ -28,6 +28,14 @@ api.Quote.unsubscribe_all()
 
 `set_cb_event` receives connection, subscription, timeout, backpressure, callback, and reconnect events. The manual processed status appendix contains `Q001` through `Q045`.
 
+### Keep Taiwan whole-lot and intraday odd-lot data separate
+
+Use `subscribe_tick(symbol, odd_lot=True)` for an intraday odd-lot position and `odd_lot=False` for a whole-lot position. Key subscriptions, cached quotes and strategy/card lookups by both the symbol and trading mode. A missing or stale odd-lot quote must not fall back to the whole-lot quote or snapshot, and the reverse also applies. Changing the product currently selected in the UI must not change existing strategies' quote sources.
+
+Keep the strategy's trading mode through entry, monitoring, reminders, exit and restart. Intraday odd-lot exits use `kgi.OddLot.Odd`; whole-lot exits use `kgi.OddLot.Common`, with the corresponding quantity unit. The subscription flag is a boolean while the order flag is an enum; see [orders](orders.md). Do not infer one from the other by passing the same raw value to both APIs. Validate allowed price/time-in-force combinations separately; market-specific execution policy is not determined by UI selection alone.
+
+An active strategy card should show its own mode's price and source time, with waiting, indicative/simulated or stale data clearly distinguished. The [OCO case](web-oco-application.md) illustrates this separation; other strategies retain their own trigger and execution rules.
+
 ## US and domestic futures processed quotes
 
 | Facade | Methods and inputs | Callback payload |
