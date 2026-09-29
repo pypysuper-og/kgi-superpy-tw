@@ -33,6 +33,26 @@ rows = frame.reindex(columns=columns).to_dict("records")
 
 工具應透過原本擁有 SDK 的執行緒查詢，避免第二次登入或跨執行緒操作 SDK。查詢失敗須顯示「未取得」，不能當成空單或授權重送。展示查詢時間、來源、資料截斷與未知欄位；唯讀診斷不應暗中確認對帳、認領外部委託或改帳。
 
+### 哪個來源比較新？
+
+`get_trades(full=True)` 是讀目前 SDK 已處理並保存的物件；`OrderReport()` 是另向券商查詢、取得該次回覆的委託快照。**不能把 OrderReport 定義成永遠最新、或無條件覆蓋 callback 的最高優先來源。** 查詢、回報推送與處理可能交錯；查詢快照也可能尚未反映剛發生的成交，callback 可能先到或晚到。SDK 2.1.2 的 `OrderReport()` 組成並回傳報表，不能假定呼叫它就會同步補寫 `get_trades()` 裡的 Trade。
+
+- 正常追蹤使用 callback／SDK 已追蹤狀態；狀態空白、累計落後、重連漏報或有矛盾時，補查 OrderReport，有成交再接 ExecReport。
+- 保存來源、查詢起訖／接收時間、券商來源時間（若有）、可靠識別及累計成交量價。接收得較晚不代表券商業務狀態一定較新；來源缺少可靠版本或時間時明示不可排序。
+- 完整報表可補齊同一原單的空白觀察，但不能僅憑來源名稱或到達先後覆寫已確認成交／終態。新增成交應核對並只入帳一次；累計倒退、量價衝突或不相容終態保留差異並補查，不猜最新、不重送未知單。
+
+### callback 會更新 get_trades 的狀態嗎？
+
+**會，更新由 SDK 內部回報處理器執行，不是由使用者註冊的 callback 負責。** 但「收到事件」不保證每個欄位都有更新，也不保證 Event.status、Operation.status 與 Trade.order_status.status 相同。以下核對 SDK 2.1.2 `trading/SubOrder.py`（私有方法名僅供定位原始碼，不供應用直接呼叫）：
+
+| 回報路徑 | 對記憶體 Trade 的處理 | 使用者 callback 的關係 |
+| --- | --- | --- |
+| `_OnOrderPending` | 尋找原 Trade、補原始序號／單號及 operation 等欄位；此路徑不更新 `trade.order_status.status` | 有找到原 Trade 時仍會發出 Event；因此 callback 可以有狀態文字，但 Trade 整體狀態仍空白或保留舊值 |
+| `_OnOrderReport` | 找到或建立 Trade，依操作、狀態碼及錯誤碼等分支更新整體狀態；不是每種碼組合都會賦值 | 在該路徑的物件處理之後，且 `_show` 啟用時才呼叫使用者 callback；新單失敗可能映成 Trade 的 `Cancelled`，須另看原始錯誤及 operation |
+| `_OnExecReport` | 配到 Trade 時先附加 Deal、更新部分／全部成交狀態及剩餘數量 | 然後在 `_show` 啟用時通知 callback；若找不到原 Trade，仍可能發出 Deal 事件，但無法更新該 Trade，需依可靠識別補查 |
+
+因此應用的 callback 應保存經遮蔽的事件及關聯識別、喚醒既有查核流程；不要自行改寫 SDK 私有快取或把 Event.status 直接塞回 Trade。取得 Trade 後自行複製出的 dict／JSON 是當時快照，不會跟著 SDK 物件後續更新。`full=False` 又會過濾部分狀態，查缺漏時先用 `full=True`，再用券商報表查核。
+
 ## 建立可追溯的委託識別
 
 送單前持久保存本地 intent 與唯一 `name`。保留 create_order 返回的 `Trade`，再追蹤後續補上的 `order.org_seqnum`（原始委託序號）與 `order.order_id`（成功後的單號）。不能只複製方法返回當下的空識別後丟棄 Trade。

@@ -2,7 +2,7 @@
 name: kgi-superpy-tw
 description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, and related trading workflows or workbench design; not for unrelated UI design or strategy profitability advice.
 metadata:
-  version: "1.37.11"
+  version: "1.37.12"
 ---
 
 # KGI SuperPy API
@@ -27,7 +27,7 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 - Implementing OCO-specific persistent units, inventory reconciliation or reminder behavior in a local Web application: [Web OCO application example](references/web-oco-application.md). Its OCO and execution rules are examples, not defaults for other strategies or official SDK contracts; shared login, shutdown and layout requirements live in the UX guide.
 - Correlated operation/result logs, hidden-launch diagnostics, support bundles and agent troubleshooting: [diagnostics and support](references/diagnostics-support.md).
 - Taiwan acknowledgement latency, pending-only diagnosis and SDK logging: [order lifecycle](references/order-lifecycle.md). Historical cases and field mappings are Taiwan-specific.
-- US sub-brokerage missing identifiers, empty cache states, rejection scenarios, automatic/manual reconciliation, fill-time quality, settlement changes, cancellation confirmation and explicit user retries: [US order diagnostics](references/us-order-diagnostics.md). Distinguish callback, SDK cache, broker reports and the application's ledger.
+- US sub-brokerage missing identifiers, empty cache states, rejection scenarios, automatic/manual reconciliation, fill-time quality, settlement changes, cancellation confirmation and explicit user retries: [US order diagnostics](references/us-order-diagnostics.md). Distinguish callback, SDK cache, broker reports and the application's ledger; read this reference for callback-driven Trade updates and why no source is unconditionally the newest.
 - Quote methods, payloads, subscription keys and quotas: [quotes](references/quotes.md).
 - Quote event enums, error codes and bounded recovery: [quote events](references/quote-events.md).
 - Historical data, MSMP conversion, freshness and backtesting: [data and backtest](references/data-and-backtest.md).
@@ -52,6 +52,8 @@ Answer in the user's language while preserving API spelling and dataset names ex
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
+
+Revision `1.37.12` clarifies SDK 2.1.2 callback-driven Trade updates, Pending events that leave aggregate status unchanged, and execution events without a matched Trade. It distinguishes cached objects from queried report snapshots: neither source nor arrival order alone establishes freshness, and calling OrderReport is not a promise to refresh Trade objects.
 
 Revision `1.37.11` defines reconnect completion across account selection, callbacks, subscriptions, fresh quote consumption, reconciliation and previously enabled strategy evaluation. It separates login recovery from usable market data and resumed monitoring, preserves existing continuation authority and limits, and clarifies that an empty SDK Trade status is an in-memory observation, not a broker rejection. This is implementation guidance, not evidence that an application or live broker has passed these recovery scenarios.
 
