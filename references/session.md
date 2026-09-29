@@ -112,7 +112,7 @@ def re_login():
 api.set_disconnect_cb(re_login)
 ```
 
-The callback receives no documented argument. The official example calls `api.login()` on the existing instance. This is trading-session recovery, separate from quote resubscription. In an application, apply the product retry policy with capped exponential backoff and an explicit stop on logout/shutdown; a user-requested persistent mode may retry without an attempt limit. Retain account context and reconcile pending orders; never replay unknown orders as a consequence of reconnect.
+The callback receives no documented argument. The official example calls `api.login()` on the existing instance. This example only restores the trading login; it does not prove that quote subscriptions, callbacks, polling or strategy evaluation have resumed. For a continuously running application, follow [whole-workflow recovery](trading-uiux.md): restore the exact account and required data flows, reconcile orders/fills and holdings, then resume previously enabled monitoring under the existing product/user authorization. A previously agreed automatic resume should not require another confirmation when the checks agree. Preserve manual stops and remaining limits; never replay unknown orders. Apply capped exponential backoff and an explicit stop on logout/shutdown; a user-requested persistent mode may retry without an attempt limit. Report login, data readiness and monitoring recovery separately.
 
 ## Official pages
 

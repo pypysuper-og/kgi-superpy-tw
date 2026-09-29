@@ -4,6 +4,12 @@
 
 ## 查哪一個來源
 
+**「SDK 快取狀態」是什麼？** 這裡指 SuperPy 在目前 Python 程序記憶體中保存的 `Trade` 物件，其 `trade.order_status.status` 欄位；不是瀏覽器快取，也不是應用程式資料庫。SDK 2.1.2 的 `SubOrder.get_trades(full=True)` 回傳這份已追蹤物件集合，不會因這次呼叫就重新向券商查完整委託。
+
+「已有原始序號、狀態空白」表示 `trade.order.org_seqnum` 已有值，但 `trade.order_status.status` 是 `None` 或未形成可判讀狀態。**識別已有、處理結果尚未在這份物件中表達，是兩件不同的事。** 可能是非同步更新尚未到達，或 SDK 物件未反映完整回報；單看空白不能確定原因，也不能判定委託失敗或未送達。預設 `get_trades(full=False)` 只保留指定進行中狀態，還可能把狀態空白的物件排除。
+
+查核順序：讀 `full=True` 的物件及回呼紀錄 → 用同帳戶的 `SubAccount.OrderReport()` 按 `orig_seqnum` 找原單並核對量價／方向 → 讀 `sales_status_code`、`order_err_code`、`order_err_msg`、`exe_qty`；有成交再接 `ExecReport()` 核對成交量價。應用程式畫面的「結果未知」是本地判斷，不是 SDK／券商原始狀態碼。完整報表也不足時保留未知；不得直接補寫 SDK 私有快取或自行改成成功／失敗。
+
 | 來源 | 可回答的問題 | 限制 |
 | --- | --- | --- |
 | `SubOrder.set_event(callback)` | 本次會話收到哪些委託／成交事件？ | 先註冊再下單；斷線、晚到、重複事件需處理。收到事件不等於應用已成功配對或入帳 |

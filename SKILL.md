@@ -2,7 +2,7 @@
 name: kgi-superpy-tw
 description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, and related trading workflows or workbench design; not for unrelated UI design or strategy profitability advice.
 metadata:
-  version: "1.37.10"
+  version: "1.37.11"
 ---
 
 # KGI SuperPy API
@@ -43,6 +43,7 @@ Answer in the user's language while preserving API spelling and dataset names ex
 - This skill authorizes no brokerage effects. Require current explicit authorization before production login or live order/create/update/cancel operations; login-only authorization does not authorize an order. Reuse already-granted scope. Use placeholders or secure runtime input; do not retain credentials or private SDK logs in skill artifacts.
 - Select the intended account from `show_account()` using account identity and market. Do not choose the first account or infer a broker route from an undocumented flag.
 - Register the relevant order callback before submitting. A returned `Trade`, pending operation, acknowledged new order and fill are distinct observations. On an unknown outcome, reconcile using that market's reports; do not resend automatically.
+- Treat reconnect as workflow recovery, not just a successful `api.login()`: restore the exact account, callbacks, required quote subscriptions or polling, fresh-data eligibility, order/fill tracking, and the previously enabled monitoring/evaluation loop. Under an existing automatic-resume agreement, reconcile automatically and restore eligible strategies without another confirmation; retain user stops and remaining limits, and isolate unresolved differences. See [workflow recovery](references/trading-uiux.md). These are application responsibilities, not SDK guarantees.
 - `update_order(..., qty=N)` reduces quantity by N, not to N. Supply either price or qty, not both, and do not reduce beyond the remaining quantity. US modification is cancel-and-replace; preserve both operation histories.
 - Quantity and identifier semantics differ by market and surface. Do not transfer backtest share quantities into Taiwan lot orders, US `org_seqnum` into Taiwan order IDs, or a futures quote alias into a dated trading contract.
 - Keep Taiwan whole-lot and intraday odd-lot strategy data and orders separate through monitoring, reminders, exit and recovery. Use the strategy's own trading mode, not the currently selected UI product; never substitute another mode's quote when data is missing. See [quote separation](references/quotes.md#keep-taiwan-whole-lot-and-intraday-odd-lot-data-separate) and [orders](references/orders.md).
@@ -51,6 +52,8 @@ Answer in the user's language while preserving API spelling and dataset names ex
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
+
+Revision `1.37.11` defines reconnect completion across account selection, callbacks, subscriptions, fresh quote consumption, reconciliation and previously enabled strategy evaluation. It separates login recovery from usable market data and resumed monitoring, preserves existing continuation authority and limits, and clarifies that an empty SDK Trade status is an in-memory observation, not a broker rejection. This is implementation guidance, not evidence that an application or live broker has passed these recovery scenarios.
 
 Revision `1.37.10` expands the US diagnostic workflow with full-report fallback for matched orders whose SDK cache status is empty, evidence-based rejection handling, automatic versus manual pairing, confirmed fills with uncertain dates, editable settlement snapshots and report provenance. It includes a sanitized reserve-failure case without treating it as a universal error-code interpretation. These are application design references, not bundled executable trading features.
 
