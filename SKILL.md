@@ -1,8 +1,8 @@
 ---
 name: kgi-superpy-tw
-description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, and related trading workflows or workbench design; not for unrelated UI design or strategy profitability advice.
+description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Compare other brokerage APIs with SuperPy and create concise technical notes with Python examples and HTML/PDF when requested. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, API capability comparisons, and related trading workflows; not for unrelated UI design, general broker rankings, or strategy profitability advice.
 metadata:
-  version: "1.37.12"
+  version: "1.37.14"
 ---
 
 # KGI SuperPy API
@@ -22,13 +22,14 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 
 ## Reference routing
 
-- Installation, eligibility, CA, simulation, login, account selection and logout: [session](references/session.md).
+- Installation, eligibility, CA, simulation, login, account selection and logout: [session](references/session.md). For Taiwan startup, usage-flow diagrams or workflow reference notes, read its [Taiwan workflow](references/session.md#tw-workflow): separate account inspection from account selection, account queries from trading callbacks, and normal use from reconnect/logout.
 - Designing or improving a SuperPy Web UI or trading workbench: [trading application UX](references/trading-uiux.md). Start with fixed workspace and tabs/dialogs, login and shutdown journeys, distinct connection/account indicators and reconnect feedback, contextual help dialogs, auditable operations, and dynamic latest-trade display when login and subscriptions are available. Treat colors, typography and example geometry as replaceable styling; preserve the user's strategy, execution policy and platform. A small API script does not need a workbench.
 - Implementing OCO-specific persistent units, inventory reconciliation or reminder behavior in a local Web application: [Web OCO application example](references/web-oco-application.md). Its OCO and execution rules are examples, not defaults for other strategies or official SDK contracts; shared login, shutdown and layout requirements live in the UX guide.
 - Correlated operation/result logs, hidden-launch diagnostics, support bundles and agent troubleshooting: [diagnostics and support](references/diagnostics-support.md).
 - Taiwan acknowledgement latency, pending-only diagnosis and SDK logging: [order lifecycle](references/order-lifecycle.md). Historical cases and field mappings are Taiwan-specific.
 - US sub-brokerage missing identifiers, empty cache states, rejection scenarios, automatic/manual reconciliation, fill-time quality, settlement changes, cancellation confirmation and explicit user retries: [US order diagnostics](references/us-order-diagnostics.md). Distinguish callback, SDK cache, broker reports and the application's ledger; read this reference for callback-driven Trade updates and why no source is unconditionally the newest.
 - Quote methods, payloads, subscription keys and quotas: [quotes](references/quotes.md).
+- Comparing another brokerage API with SuperPy, finding equivalent fields across multiple methods, or turning findings into technical notes: [API comparison and technical notes](references/technical-notes.md). Keep a comparison-only answer in chat; create HTML/PDF when requested. Reference notes use concise, descriptive Traditional Chinese, highlighted Python and official links; HTML flow nodes link to the relevant document sections, with PDF destinations checked after export.
 - Quote event enums, error codes and bounded recovery: [quote events](references/quote-events.md).
 - Historical data, MSMP conversion, freshness and backtesting: [data and backtest](references/data-and-backtest.md).
 - Source identity, manual section locators and contradictions: [manual baseline](references/manual-baseline.md).
@@ -52,6 +53,10 @@ Answer in the user's language while preserving API spelling and dataset names ex
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
+
+Revision `1.37.14` adds a concise Taiwan startup and session workflow with official links, account-query and trading-callback branches, reconnect responsibilities, and logout semantics. Reference-note guidance uses descriptive prose and connects HTML flow nodes to their explanations, preserving internal destinations in requested PDF exports. These are documentation and authoring improvements, not new SDK capabilities or live trading evidence.
+
+Revision `1.37.13` adds a source-grounded workflow for comparing brokerage API capabilities and producing concise SuperPy technical notes. It separates semantic equivalence from method-name similarity, documented contracts from SDK/Server/runtime evidence, and research findings from the requested HTML/PDF content. This is authoring guidance, not a new SDK capability.
 
 Revision `1.37.12` clarifies SDK 2.1.2 callback-driven Trade updates, Pending events that leave aggregate status unchanged, and execution events without a matched Trade. It distinguishes cached objects from queried report snapshots: neither source nor arrival order alone establishes freshness, and calling OrderReport is not a promise to refresh Trade objects.
 

@@ -2,6 +2,44 @@
 
 Source: v1.37, TOC 9–26; see [manual baseline](manual-baseline.md) for version conflicts.
 
+<a id="tw-workflow"></a>
+
+## 台股交易與帳務查詢流程
+
+適用於台股作業前置、API 使用流程及參考筆記。官方功能頁於 2026-10-12 核對；以下區分 SDK 文件化介面與應用端的恢復責任。
+
+```mermaid
+flowchart TD
+    login["登入凱基帳號：kgi.login"] --> accounts["顯示帳號資訊：show_account"]
+    accounts --> select["設定證券帳號：set_Account"]
+    select --> info["核對目前帳號：login_info"]
+    info --> queries["帳務查詢：Account"]
+    info --> callback["交易主動回報：Order.set_event"]
+    callback --> trading["交易作業與事件回報：Order"]
+    queries --> logout["使用結束：logout"]
+    trading --> logout
+```
+
+| 功能 | 介面 | 作用與官方來源 |
+| --- | --- | --- |
+| 登入凱基帳號 | `kgi.login(person_id, person_pwd, simulation=True)` | 建立 API 工作階段；`True` 是測試環境、`False` 是正式環境，預設為 `True`。正式登入包含 CA 驗證與初始化。[登入說明](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/inAccount) |
+| 顯示帳號資訊 | `api.show_account()` | 查閱目前身分下的帳戶清單，欄位包含 `account`、`account_flag`、`broker_id`。台股使用類型為「證券」且身分符合目標的帳戶。[帳戶清單](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/showAccount) |
+| 設定交易帳號 | `api.set_Account(account)` | 指定證券帳號並啟用 `Order`、`Account`。官網範例包含委託／成交補檔與完成訊息。[設定說明](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/setTransaction) |
+| 顯示已登入帳號 | `api.login_info()` | 查閱目前帳號資訊，可核對「證券」項目下的帳號與券商代碼；不代替登入及初始化結果。[目前帳號](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/showInAccount) |
+| 交易主動回報 | `api.Order.set_event(handler)` | 在 `Order` 啟用後註冊單一 `event` 參數的回呼，接收新單、改價、改量、刪單及成交事件；交易操作前完成註冊。[交易回呼](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/orderSetEvent) |
+| 斷線重新登入 | `api.set_disconnect_cb(re_login)` | 預先註冊無參數的斷線回呼。官網範例在回呼內呼叫既有物件的 `api.login()`。[重登說明](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/reLogin) |
+| 登出 | `api.logout()` | 結束工作階段並重置目前載入設定。之後可使用 `api.login()` 再登入；未完成委託的刪單需另行處理及確認。[登出說明](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/logout) |
+
+`show_account()` 與 `login_info()` 用於資訊查詢及核對。帳號設定與回呼註冊屬於初始化或恢復作業，通常不必每次查帳或送出委託都重做。多帳戶時，依市場與目標帳號識別，不預設採用清單第一項。
+
+**帳務查詢與交易回報：** 證券帳號設定後，帳務查詢可獨立使用 `api.Account`，不以交易 callback 為必要前提。核對委託、成交與庫存的介面包括 [OrderReport](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/accountOrderReport)、[ExecReport](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/accountExecReport)、[InventorySum](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/accountInventorySum)；參數與回傳內容見 [帳務](accounts.md)。
+
+**事件語意：** `event.task` 表示事件種類，`event.status` 表示該次操作狀態。`NewOrder + Success` 表示新單操作成功，成交資訊由 `Task.Deal` 等成交回報提供；操作成功與成交分別判讀。詳見 [Event 物件](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/eventObject) 與 [交易回呼](orders.md#event-callback)。股價、委買委賣等行情使用另一組 [行情 callback 與訂閱](quotes.md)。
+
+**工作階段恢復：** 斷線回呼是在 API 物件建立後預先設定的例外處理，不是正常啟動流程最後執行的一步。重新登入後，帳號、交易 callback、委託／成交及庫存核對由應用程式處理；有使用行情或自動監控時，其訂閱、資料更新及監控意圖也需恢復。結果不明的委託先查證，不重複送單。官網重登範例不建立「全部流程已自動恢復」的保證，詳細恢復條件見 [交易應用工作流程](trading-uiux.md)。
+
+**結束作業：** 正常結束時先停用應用端自動操作及自動重登，再登出。登出、斷線恢復與刪單各有不同作用，流程圖應依發生時機呈現。
+
 ## Environment contract
 
 - Package: `kgisuperpy`

@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0f766e" alt="MIT 授權"></a>
-  <img src="https://img.shields.io/badge/Skill-1.37.12-0891b2" alt="Skill 版本 1.37.12">
+  <img src="https://img.shields.io/badge/Skill-1.37.14-0891b2" alt="Skill 版本 1.37.14">
   <img src="https://img.shields.io/badge/社群貢獻-非官方-475569" alt="非官方社群貢獻">
   <img src="https://img.shields.io/badge/README-繁體中文-0f766e" alt="繁體中文 README">
 </p>
@@ -34,15 +34,16 @@
 
 適合正在做這些事的你：
 
-- **第一次串接 SuperPy**：釐清安裝、憑證、登入、選帳號與登出的順序。
+- **第一次串接 SuperPy**：釐清登入、選帳號、帳務查詢與交易回報，並區分斷線恢復和正常登出。
 - **用 AI 開發行情或交易工具**：讓生成的程式有文件依據，少靠名稱猜 API。
+- **從同業 API 找 SuperPy 對應功能**：查核方法與欄位語意，整理附官方連結及 Python 範例的 HTML／PDF 技術筆記。
 - **從台股擴展到美股或期貨**：先辨認市場差異，再處理委託、帳務與回報。
 - **維護既有 Python 專案**：檢查回呼、委託狀態、斷線恢復與去識別化診斷紀錄。
 - **設計交易介面與策略工作台**：組合狀態呈現、操作回饋、提醒與復原流程，保留自己的策略與買賣執行方式。
 
 > 本專案由社群整理與維護，未受凱基官方背書。這是一套給 AI 助手使用的指引與參考文件；SuperPy SDK、券商服務與開通資格仍由官方提供。安裝 Skill 本身不會連線券商或執行交易。
 
-本版釐清委託查核：SDK 回呼如何更新記憶體中的委託、哪些事件不更新整體狀態，以及為何 OrderReport 不能無條件當作最新資料。並延續完整斷線恢復：重新登入後，還要恢復行情訂閱、委託追蹤及原本啟用的監控洗價；依既有授權自動恢復，僅將無法確認的差異交給使用者處理。
+本版補充[台股交易與帳務查詢流程](references/session.md#tw-workflow)：登入、可用帳戶、交易帳號、目前帳號、交易 callback、斷線重登與登出的作用，附官方功能連結。參考筆記採平鋪直述；HTML 流程圖節點連到對應內容，要求 PDF 時保留並檢查頁內跳轉。[同業 API 對照與技術筆記](references/technical-notes.md) 也持續提供功能語意查證、繁中 HTML／PDF 與 Python 範例的整理方式。
 
 ## 這個 Skill 帶來什麼？
 
@@ -50,6 +51,7 @@
 | --- | --- |
 | 文件很多，不知道先讀哪一段 | 依市場與操作分流，從登入、下單、帳務到行情與回測逐步定位 |
 | AI 寫出看似合理、其實不存在的方法 | 保留方法名稱、參數與來源；文件有矛盾時明確標示待查證處 |
+| 同業 API 有這項功能，SuperPy 要怎麼做 | 依功能語意查核對應方法、欄位與限制；需要時整理成精簡技術筆記 |
 | 把「方法回傳」誤當成「已成交」 | 區分方法返回、操作回報、委託狀態與成交證據 |
 | 跨市場時沿用錯誤假設 | 分開整理帳號選擇、數量單位、委託識別與改撤單語意 |
 | 發生問題，只剩一句「送單失敗」 | 提供操作關聯、狀態追蹤、敏感資訊遮蔽與診斷順序的設計參考 |
@@ -157,6 +159,15 @@ python -m pip install kgisuperpy
 先提出介面設計與展示驗證情境，不登入券商或執行交易。
 ```
 
+**同業功能對照與技術筆記**
+
+```text
+請使用 $kgi-superpy-tw，讀取我提供的同業官方 API 文件，
+確認 SuperPy 的對應方法、欄位與判斷方式，再整理成精簡繁中技術筆記。
+文件只寫 SuperPy 使用方式，附 Python 範例與語法上色、官方功能完整網址。
+先做 HTML 再轉 PDF，產物放在我指定的目錄，檢查每頁排版與連結。
+```
+
 <a id="coverage"></a>
 
 ## 一份 Skill，按四個市場分別理解
@@ -197,6 +208,7 @@ python -m pip install kgisuperpy
 | 美股、國內期權、海外期權 | [美股複委託](references/us-stocks.md) · [國內期權](references/domestic-futures.md) · [海外期權](references/overseas-futures.md) |
 | 行情訂閱、回呼、錯誤與恢復 | [行情](references/quotes.md) · [行情事件](references/quote-events.md) |
 | 歷史資料、MSMP 與回測 | [資料與回測](references/data-and-backtest.md) |
+| 同業功能對照、繁中 HTML／PDF 技術筆記 | [API 對照與技術筆記](references/technical-notes.md) |
 | 通用交易介面、策略狀態與操作回饋 | [交易應用 UIUX 指南](references/trading-uiux.md) |
 | 本機交易工具與可追查紀錄 | [Web OCO 設計參考](references/web-oco-application.md) · [診斷與支援](references/diagnostics-support.md) |
 | 文件版本、矛盾與來源 | [手冊基準](references/manual-baseline.md) · [官方連結索引](references/official-index.md) |
@@ -205,9 +217,9 @@ README 與使用情境採繁體中文；部分技術參考採英文，保留 API
 
 ## 版本與使用邊界
 
-本版整合台股整張／盤中零股的行情與委託隔離指引，並補足 Windows 本機 Web 隱藏啟動：不常駐 CMD／PowerShell 視窗，保留登入輸出、稽核與啟動失敗提示。Web 指南延續六項 UX 契約：功能收納、登入／結束、連線／重連、就地說明、完整稽核，以及訂閱後的最新成交價展示。提供設計與驗證建議，不附已完成訂閱整合的 Web 程式。
+既有指南包含台股整張／盤中零股的行情與委託隔離，以及 Windows 本機 Web 隱藏啟動：不常駐 CMD／PowerShell 視窗，保留登入輸出、稽核與啟動失敗提示。Web 指南延續六項 UX 契約：功能收納、登入／結束、連線／重連、就地說明、完整稽核，以及訂閱後的最新成交價展示。提供設計與驗證建議，不附已完成訂閱整合的 Web 程式。
 
-- **Skill 版本：`1.37.12`。** 先前版本明確補充整張／零股的行情、策略卡片、監控與出場委託隔離規則；延續通用交易 UIUX 指南與 OCO 僅提醒案例。文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
+- **Skill 版本：`1.37.14`。** 本版補充台股登入與作業流程、交易回呼及 HTML／PDF 頁內連結指引，延續同業 API 對照、委託查核、斷線恢復及交易 UIUX 指引。文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
 - **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
 - **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
 - **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。
