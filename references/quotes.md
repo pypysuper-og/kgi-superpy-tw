@@ -28,6 +28,12 @@ api.Quote.unsubscribe_all()
 
 `set_cb_event` receives connection, subscription, timeout, backpressure, callback, and reconnect events. The manual processed status appendix contains `Q001` through `Q045`.
 
+### Index symbols need their own subscription evidence
+
+Data history, latest-trading-day Data and streaming Quote are separate surfaces. A Data symbol is not automatically a Quote product, and `Order.contract()` is not a complete catalog of all Data/index symbols. MSMP `TSE`/`OTC` are table names, not established subscription symbols.
+
+The official `subscribe_kbar` stock example does not establish index support. For Y9999/OTC99, see the [dataset boundaries and SDK 2.1.2 observations](data-and-backtest.md#taiwan-indices-dataset-and-symbol-boundaries). Distinguish local validation, server subscription acceptance and callbacks; an after-hours callback does not prove continuous market-hours updates. Do not extend a processed Tick result to `SWQuote` or index K-bar subscriptions without testing that surface.
+
 ### Keep Taiwan whole-lot and intraday odd-lot data separate
 
 Use `subscribe_tick(symbol, odd_lot=True)` for an intraday odd-lot position and `odd_lot=False` for a whole-lot position. Key subscriptions, cached quotes and strategy/card lookups by both the symbol and trading mode. A missing or stale odd-lot quote must not fall back to the whole-lot quote or snapshot, and the reverse also applies. Changing the product currently selected in the UI must not change existing strategies' quote sources.

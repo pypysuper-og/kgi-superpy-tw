@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0f766e" alt="MIT 授權"></a>
-  <img src="https://img.shields.io/badge/Skill-1.37.14-0891b2" alt="Skill 版本 1.37.14">
+  <img src="https://img.shields.io/badge/Skill-1.37.15-0891b2" alt="Skill 版本 1.37.15">
   <img src="https://img.shields.io/badge/社群貢獻-非官方-475569" alt="非官方社群貢獻">
   <img src="https://img.shields.io/badge/README-繁體中文-0f766e" alt="繁體中文 README">
 </p>
@@ -43,7 +43,9 @@
 
 > 本專案由社群整理與維護，未受凱基官方背書。這是一套給 AI 助手使用的指引與參考文件；SuperPy SDK、券商服務與開通資格仍由官方提供。安裝 Skill 本身不會連線券商或執行交易。
 
-本版補充[台股交易與帳務查詢流程](references/session.md#tw-workflow)：登入、可用帳戶、交易帳號、目前帳號、交易 callback、斷線重登與登出的作用，附官方功能連結。參考筆記採平鋪直述；HTML 流程圖節點連到對應內容，要求 PDF 時保留並檢查頁內跳轉。[同業 API 對照與技術筆記](references/technical-notes.md) 也持續提供功能語意查證、繁中 HTML／PDF 與 Python 範例的整理方式。
+本版補上官方清單中的[含加權／櫃買指數歷史分 K](references/data-and-backtest.md#taiwan-indices-dataset-and-symbol-boundaries)，整理 Data 代碼、Quote 商品與 MSMP 表名的差異。2026-11-02 的 SDK 2.1.2 測試已取得 Y9999／OTC99 歷史日 K；最後交易日分 K 對兩個指數回空表，歷史分 K 則連股票對照都遭存取拒絕。各項結果保留版本與條件，避免推成所有指數資料都不支援，或承諾已驗證即時訂閱。
+
+既有[台股交易與帳務查詢流程](references/session.md#tw-workflow)及[同業 API 對照與技術筆記](references/technical-notes.md)持續提供官方功能連結、繁中 HTML／PDF 與 Python 範例；HTML 流程圖節點連到對應內容，要求 PDF 時保留並檢查頁內跳轉。
 
 ## 這個 Skill 帶來什麼？
 
@@ -219,7 +221,7 @@ README 與使用情境採繁體中文；部分技術參考採英文，保留 API
 
 既有指南包含台股整張／盤中零股的行情與委託隔離，以及 Windows 本機 Web 隱藏啟動：不常駐 CMD／PowerShell 視窗，保留登入輸出、稽核與啟動失敗提示。Web 指南延續六項 UX 契約：功能收納、登入／結束、連線／重連、就地說明、完整稽核，以及訂閱後的最新成交價展示。提供設計與驗證建議，不附已完成訂閱整合的 Web 程式。
 
-- **Skill 版本：`1.37.14`。** 本版補充台股登入與作業流程、交易回呼及 HTML／PDF 頁內連結指引，延續同業 API 對照、委託查核、斷線恢復及交易 UIUX 指引。文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
+- **Skill 版本：`1.37.15`。** 本版補充台股指數資料集與代碼邊界，以及分開判讀歷史資料、最後交易日分 K 和 Quote 訂閱的實測依據。文件基準仍為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
 - **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
 - **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
 - **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。

@@ -2,7 +2,7 @@
 name: kgi-superpy-tw
 description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Compare other brokerage APIs with SuperPy and create concise technical notes with Python examples and HTML/PDF when requested. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, API capability comparisons, and related trading workflows; not for unrelated UI design, general broker rankings, or strategy profitability advice.
 metadata:
-  version: "1.37.14"
+  version: "1.37.15"
 ---
 
 # KGI SuperPy API
@@ -31,7 +31,7 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 - Quote methods, payloads, subscription keys and quotas: [quotes](references/quotes.md).
 - Comparing another brokerage API with SuperPy, finding equivalent fields across multiple methods, or turning findings into technical notes: [API comparison and technical notes](references/technical-notes.md). Keep a comparison-only answer in chat; create HTML/PDF when requested. Reference notes use concise, descriptive Traditional Chinese, highlighted Python and official links; HTML flow nodes link to the relevant document sections, with PDF destinations checked after export.
 - Quote event enums, error codes and bounded recovery: [quote events](references/quote-events.md).
-- Historical data, MSMP conversion, freshness and backtesting: [data and backtest](references/data-and-backtest.md).
+- Historical data, Taiwan index dataset/symbol differences, MSMP conversion, freshness and backtesting: [data and backtest](references/data-and-backtest.md).
 - Source identity, manual section locators and contradictions: [manual baseline](references/manual-baseline.md).
 - Original Taiwan website links for refresh: [official index](references/official-index.md).
 
@@ -49,10 +49,12 @@ Answer in the user's language while preserving API spelling and dataset names ex
 - Quantity and identifier semantics differ by market and surface. Do not transfer backtest share quantities into Taiwan lot orders, US `org_seqnum` into Taiwan order IDs, or a futures quote alias into a dated trading contract.
 - Keep Taiwan whole-lot and intraday odd-lot strategy data and orders separate through monitoring, reminders, exit and recovery. Use the strategy's own trading mode, not the currently selected UI product; never substitute another mode's quote when data is missing. See [quote separation](references/quotes.md#keep-taiwan-whole-lot-and-intraday-odd-lot-data-separate) and [orders](references/orders.md).
 - Processed quote events, `SWQuote` events and order events have different fields. Raw `SWMarketData.data_type` identifies the updated group; other values may be stale from the prior update.
-- Read exact dataset names and arguments from the appropriate `get_table()` catalog. Historical update schedules are expected processing times, not proof of freshness or an SLA.
+- Read exact dataset names and arguments from the appropriate `get_table()` catalog. Quote/Order product catalogs do not define the entire Data/index universe, and a Data symbol does not establish Quote acceptance. MSMP table names are not subscription symbols. Historical update schedules are expected processing times, not proof of freshness or an SLA.
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
+
+Revision `1.37.15` adds the publicly documented historical minute-bar dataset that includes Taiwan indices and separates Data symbols from Quote/Order products and MSMP tables. Dated SDK 2.1.2 observations confirm Y9999/OTC99 daily-history retrieval, distinguish empty latest-day index results from a nonempty stock control, and record historical-minute access denial for all tested symbols. Historical retrieval, latest-trading-day data and streaming subscriptions require separate evidence; these observations are not a general entitlement or service guarantee.
 
 Revision `1.37.14` adds a concise Taiwan startup and session workflow with official links, account-query and trading-callback branches, reconnect responsibilities, and logout semantics. Reference-note guidance uses descriptive prose and connects HTML flow nodes to their explanations, preserving internal destinations in requested PDF exports. These are documentation and authoring improvements, not new SDK capabilities or live trading evidence.
 
