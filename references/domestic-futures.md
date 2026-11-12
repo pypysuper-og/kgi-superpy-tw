@@ -1,6 +1,6 @@
 # Domestic futures and options
 
-Source: v1.37 FutOrder (TOC 91–114), FutAccount (185–206). Session and CA requirements are in [session](session.md); quotes/history in [quotes](quotes.md) and [data](data-and-backtest.md).
+Start from the [public domestic futures index](https://superpy.kgieworld.com.tw/kgipythonapi/guide/fut/member). Session and CA requirements are in [session](session.md); quotes/history in [quotes](quotes.md) and [data](data-and-backtest.md).
 
 ## Orders
 
@@ -23,9 +23,9 @@ trade = api.FutOrder.create_order(
 | `symbol` | Required str; futures or options contract |
 | `qty` | Required int; contracts (口數) |
 | `price` | Required numeric limit price or `PriceType.MKT`, `StopLossMarket`, `RangeMarket` |
-| `time_in_force` | `ROD` default; `IOC`, `FOK`; manual restricts ROD to limit orders |
+| `time_in_force` | `ROD` default; `IOC`, `FOK`; the [public create page](https://superpy.kgieworld.com.tw/kgipythonapi/guide/fut/orderCreate) restricts ROD to limit orders |
 
-The parameter table's uppercase `BUY`/`SELL` conflicts with examples; see [baseline](manual-baseline.md). No `stop_price`, `position_effect`, `trade_hour`, `category`, `order_cond`, `odd_lot`, or `name` input is established by this create table. Returned `PositionEffect` or `TradeHour` does not authorize adding such keywords. A stop-trigger workflow needs additional public-contract confirmation because the listed `StopLossMarket` enum does not establish a trigger-price input.
+The public create page's uppercase `BUY`/`SELL` conflicts with its `Buy`/`Sell` examples; verify the target enum spelling through [source verification](source-verification.md). No `stop_price`, `position_effect`, `trade_hour`, `category`, `order_cond`, `odd_lot`, or `name` input is established by that page. Returned `PositionEffect` or `TradeHour` does not authorize adding such keywords. A stop-trigger workflow needs additional contract confirmation because the listed `StopLossMarket` enum does not establish a trigger-price input.
 
 | Method | Contract |
 | --- | --- |
@@ -36,7 +36,7 @@ The parameter table's uppercase `BUY`/`SELL` conflicts with examples; see [basel
 | `FutOrder.get_deals()` | Deals grouped by symbol |
 | `FutOrder.set_event(callback)` | Tasks `NewOrder`, `UpdatePrice`, `UpdateQty`, `CancelOrder`, `Deal` |
 
-The manual does not establish `FutOrder.contract()` or `FutOrder.get_position()`; use the documented Data catalog and FutAccount position queries instead of inventing symmetric methods.
+Do not assume `FutOrder.contract()` or `FutOrder.get_position()` exists. Check the Data catalog and FutAccount position queries instead of inventing symmetric methods.
 
 ## Trade, Event and reports
 

@@ -1,10 +1,10 @@
 # Quote events and recovery
 
-Source: v1.37 processed event sections (TOC 239, 259, 276), raw event sections (294, 312), status appendix (384–387). These are quote events, not order events.
+These are quote events, not order events. Check exact codes and fields through the public [quote-event links](official-index.md#processed-quote) and target SDK version.
 
 ## Processed Quote / USQuote / FutQuote
 
-Use `set_cb_event(callback)` on the chosen facade. Callback receives one `kgi.Event` with `event_code` and `respond_code` as shown in the manual. Do not use order-event `task/status` or raw-event `status_code` here.
+Use `set_cb_event(callback)` on the chosen facade. Callback receives one `kgi.Event` with `event_code` and `respond_code`. Do not use order-event `task/status` or raw-event `status_code` here.
 
 | `kgi.Event.event_code` members | Meaning |
 | --- | --- |
@@ -55,8 +55,8 @@ Do not interpret SW007 solely as network-channel exhaustion; its detailed append
 
 ## Application recovery guidance
 
-The manual shows quote resubscription on processed `Event.event_code.DISCONNECTED` or raw `SWEvent.status_code.SW_DISCONNECTED`. It also exposes SDK automatic-reconnect events. These examples do not prove lossless replay or a required additional application reconnect loop.
+Processed `Event.event_code.DISCONNECTED` or raw `SWEvent.status_code.SW_DISCONNECTED` can inform recovery handling. Check SDK automatic-reconnect events and ownership before adding application recovery; a disconnect event does not establish lossless replay or require an additional reconnect loop.
 
 If implementing recovery, keep desired subscriptions separately from the currently reported subscriptions, including market, mode, odd-lot flag and K-bar period. Reconcile after reconnect using that facade's `get_subscriptions()`. Use one recovery owner with an explicit attempt/deadline budget; stop on manual disconnect, permission/credential problems, exhausted retry budget or subscription quota. Do not create multiple sessions to bypass quota.
 
-Keep callbacks short: enqueue work, track callback failures/backpressure, and surface dropped data. The manual's inline sleeps are examples, not a requirement. Connection restored is not proof all subscriptions or missing ticks were recovered. Reconcile actual payload arrival and timestamps. A quote recovery must not replay trading orders.
+Keep callbacks short: enqueue work, track callback failures/backpressure, and surface dropped data. Connection restored is not proof all subscriptions or missing ticks were recovered. Reconcile actual payload arrival and timestamps. A quote recovery must not replay trading orders.

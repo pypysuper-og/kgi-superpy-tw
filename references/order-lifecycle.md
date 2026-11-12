@@ -4,7 +4,7 @@ Use for order tests, acknowledgement latency, missing callbacks, or reconciliati
 Official pages below were checked on 2026-09-05. The observed case uses kgisuperpy
 2.1.1; distinguish its diagnostics from the documented public API contract.
 
-The v1.37 manual confirms the Taiwan object/event distinctions below; the pending-only incident remains a historical 2.1.1 observation. US and futures workflows must use their own market references.
+The object/event distinctions below concern Taiwan securities; the pending-only incident remains a historical 2.1.1 observation. Check the public [Trade and Event links](official-index.md#orders) for the affected contract. US and futures workflows must use their own market references.
 
 ## Official lifecycle
 

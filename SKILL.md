@@ -2,12 +2,12 @@
 name: kgi-superpy-tw
 description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations, application state/module interactions, and trading UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use practical cases and human-agent engineering guidance, compare brokerage APIs, and create technical notes when requested. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API and related trading workflows; not for unrelated UI design, general broker rankings, or strategy profitability advice.
 metadata:
-  version: "1.37.16"
+  version: "1.37.17"
 ---
 
 # KGI SuperPy API
 
-This is a community-maintained skill, not an official KGI product. Use the references summarized from **凱基 Python API 使用手冊 v1.37** as the versioned baseline; the original manual and SDK are not bundled. The identifier `kgi-superpy-tw` is retained for existing invocations; coverage includes all four markets.
+This is a community-maintained skill, not an official KGI product. Use the relevant development references alongside the official website and evidence from the target SDK version. Reference notes are not a guarantee of current compatibility; follow [source verification](references/source-verification.md) when a contract needs confirmation. The identifier `kgi-superpy-tw` is retained for existing invocations; coverage includes all four markets.
 
 ## Choose the market before the API
 
@@ -36,10 +36,10 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 - Comparing another brokerage API with SuperPy, finding equivalent fields across multiple methods, or turning findings into technical notes: [API comparison and technical notes](references/technical-notes.md). Keep a comparison-only answer in chat; create HTML/PDF when requested. Reference notes use concise, descriptive Traditional Chinese, highlighted Python and official links; HTML flow nodes link to the relevant document sections, with PDF destinations checked after export.
 - Quote event enums, error codes and bounded recovery: [quote events](references/quote-events.md).
 - Historical data, Taiwan index dataset/symbol differences, MSMP conversion, freshness and backtesting: [data and backtest](references/data-and-backtest.md).
-- Source identity, manual section locators and contradictions: [manual baseline](references/manual-baseline.md).
+- Source selection, version-specific evidence and unresolved contracts: [source verification](references/source-verification.md).
 - Original Taiwan website links for refresh: [official index](references/official-index.md).
 
-Answer in the user's language while preserving API spelling and dataset names exactly. Consult the baseline when a signature, enum, version or example conflicts.
+Answer in the user's language while preserving API spelling and dataset names exactly. Verify the affected signature, enum or version when sources conflict; do not invent a resolution or describe unverified material as publicly documented.
 
 ## Practical engineering partner
 
@@ -55,7 +55,7 @@ Use these as situational judgment, not a mandatory checklist, persona impersonat
 ## Development invariants
 
 - Use documented public methods, parameters, enums and lifecycle order. Do not invent fallback calls or infer input parameters from returned fields. Private SDK internals, `repr(api)`, `print(api)` and `api._ObjOrder.FIsLogon` are not documented login checks. The documented backtest parameter `_maxtrades` is an explicit exception to the underscore naming heuristic.
-- `kgi.login(person_id, person_pwd, simulation=True)` selects simulation by default; `False` selects production. US simulation is explicitly unavailable in this manual despite generic test text. Never silently switch a test to production.
+- `kgi.login(person_id, person_pwd, simulation=True)` selects simulation by default; `False` selects production. The [US service terms](https://superpy.kgieworld.com.tw/kgipythonapi/guide/us/terms) state that US simulation is unavailable. Never silently switch a test to production.
 - This skill authorizes no brokerage effects. Require current explicit authorization before production login or live order/create/update/cancel operations; login-only authorization does not authorize an order. Reuse already-granted scope. Use placeholders or secure runtime input; do not retain credentials or private SDK logs in skill artifacts.
 - Select the intended account from `show_account()` using account identity and market. Do not choose the first account or infer a broker route from an undocumented flag.
 - Register the relevant order callback before submitting. A returned `Trade`, pending operation, acknowledged new order and fill are distinct observations. On an unknown outcome, reconcile using that market's reports; do not resend automatically.
@@ -68,6 +68,8 @@ Use these as situational judgment, not a mandatory checklist, persona impersonat
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
+
+Revision `1.37.17` removes nonpublic source metadata, adds source-verification guidance, and preserves the README's established layout and slogan while integrating practical development topics. Existing evaluation results identify their original candidates; they are not a behavioral evaluation of this revision.
 
 Revision `1.37.16` adds a Taiwan/US practical edition covering state/module interactions, three complete case explanations with standard-library synthetic models, an implicit engineering-partner guide, frontend evolution patterns and a fixed before/after decision evaluation. Scope and evidence limits accompany each case. This is local development knowledge, not an SDK update, a trading application release or a live-broker certification; evaluation results are recorded separately in [the evaluation note](evals/evaluation.md).
 
@@ -89,4 +91,4 @@ Revision `1.37.8` integrates Taiwan whole-lot/odd-lot source and order separatio
 
 Revision `1.37.7` centers the Web guidance on six user-facing workflows: workspace organization, login/shutdown, session and reconnect feedback, contextual help, auditable lifecycles, and latest-trade display from verified subscriptions. This is design guidance, not a shipped Web application or evidence of live market-data integration.
 
-Revision `1.37.6` makes Taiwan whole-lot/odd-lot separation explicit across quote caches, strategy cards, monitoring and exit orders. Revision `1.37.5` added strategy-independent trading UI/UX patterns and the OCO reminder case. These are application design recommendations, not new SDK guarantees. The manual baseline remains v1.37, reviewed on 2026-09-16. Its release section lists SDK V2.1.2 (2026-09-15), including Python 3.14 support, although the filename ends in `_20260902`. This is a document baseline, not an SDK installation or live compatibility test. See [source identity and conflicts](references/manual-baseline.md).
+Revision `1.37.6` makes Taiwan whole-lot/odd-lot separation explicit across quote caches, strategy cards, monitoring and exit orders. Revision `1.37.5` added strategy-independent trading UI/UX patterns and the OCO reminder case. These are application design recommendations, not new SDK guarantees. Check the [official release page](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/version) and target environment for SDK compatibility; source and evidence boundaries are in [source verification](references/source-verification.md).

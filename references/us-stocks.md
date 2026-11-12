@@ -1,6 +1,6 @@
 # US stocks through sub-brokerage
 
-Source: v1.37, sections SubOrder (TOC 60–90) and SubAccount (174–184). Read [session](session.md) first for eligibility and the explicit absence of US simulation. Quotes and data use [USQuote](quotes.md) and [USData/USMSMP](data-and-backtest.md).
+Start from the [public US API index](https://superpy.kgieworld.com.tw/kgipythonapi/guide/us/member) and read [session](session.md) for eligibility and the absence of US simulation. Quotes and data use [USQuote](quotes.md) and [USData/USMSMP](data-and-backtest.md). Confirm exact contracts against the target SDK version.
 
 ## Account and orders
 
@@ -54,7 +54,7 @@ For missing order numbers, rejected orders, callback/cache versus broker-query e
 
 ## Accounting
 
-Use `api.SubAccount` according to the accounting headings, examples and account initialization contract. The manual concatenates assignment and display text in places (`df=...()df`); split these into valid Python statements rather than copying that formatting.
+Use `api.SubAccount` after selecting the intended sub-brokerage account. Validate examples as Python before adapting them, and inspect each query's actual return schema.
 
 | Method | Inputs | Useful returned fields |
 | --- | --- | --- |
@@ -66,4 +66,4 @@ Use `api.SubAccount` according to the accounting headings, examples and account 
 
 Note the distinct spellings `org_seqnum` (order/event) and `orig_seqnum` (account report). Report `exe_status_code` is 0=unfilled, 1=partial, 2=filled; `sales_status_code` is 0=reserved, 1=forwarding, 2=accepted, 3=failed, 4=expired, 5=voided, 6=invalid, 7=processing, 8=sent to trading desk, 9=processing failed, 10=upstream processing. Preserve source values alongside any application mapping.
 
-The stock-position table has conflicting descriptions for `Qty` and `settle_currency`; do not infer units or meaning from those erroneous descriptions alone. Validate schema against the target public interface before calculations.
+Validate the units and meaning of `Qty` and `settle_currency` against the target SDK and actual return schema before calculations; field names alone do not establish them.

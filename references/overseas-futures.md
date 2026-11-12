@@ -1,6 +1,6 @@
 # Overseas futures and options
 
-Source: v1.37 OvfutOrder (TOC 115–147), OvfutAccount (207–226). Use executable spelling `Ovfut`, not prose `OvFut`.
+Target-SDK integration notes for `OvfutOrder` and `OvfutAccount`. A public overseas API index has not been verified here; confirm the affected interface and account eligibility with KGI before relying on these notes. Follow [source verification](source-verification.md) rather than inferring an official public contract from this reference.
 
 ## Selection, contracts and create inputs
 
@@ -13,13 +13,13 @@ Register `api.OvfutOrder.set_event(callback)` before an authorized order. The ca
 | `exchange` | Required str: exchange code |
 | `action`, `com_id`, `cp`, `com_ym` | Required first leg: action, product ID, option/futures type, contract year-month |
 | `cp` | `kgi.CP.CallOption`, `PutOption`, `Futures` |
-| `strike_price` | First-leg strike string; manual futures example supplies empty string |
+| `strike_price` | First-leg strike string; verify the accepted value for a futures contract |
 | `action2`, `com_id2`, `cp2`, `com_ym2`, `strike_price2` | Second-leg fields for a complex/spread order; preserve all supplied leg identities |
 | `qty` | Required int: contracts |
-| `price` | Required numeric price; when `price_type=MKT`, manual says converted to market |
+| `price` | Required numeric price; confirm how the target SDK handles it when `price_type=MKT` |
 | `price_type` | Required: `PriceType.LMT`, `MKT`, `StopLossMarket`, `StopLossLimit` |
 | `stop_price` | Required for either stop type; unnecessary for LMT/MKT |
-| `time_in_force` | Default ROD; IOC/FOK also listed; manual restricts ROD to limit orders |
+| `time_in_force` | Verify ROD/IOC/FOK support and price-type restrictions for the target contract |
 
 ```python
 # Integration fragment; values are supplied for the intended current contract.
@@ -37,7 +37,7 @@ trade = api.OvfutOrder.create_order(
 )
 ```
 
-For two legs add the documented second-leg inputs, including its own action and month; do not flatten a spread into a stock-style `symbol` argument. The action table has uppercase spelling errors; examples/object fields use `kgi.Action.Buy`/`Sell`.
+For two legs confirm the second-leg inputs, including its own action and month; do not flatten a spread into a stock-style `symbol` argument. Verify the accepted `kgi.Action` spelling in the target SDK.
 
 ## Modification, cancellation and state
 
@@ -64,4 +64,4 @@ Call on `api.OvfutAccount`: `PositionSum()`, `PositionDetail()`, `COVER()`, `COV
 
 `OrderFunc`: O=new, C=cancel, M=modify; these differ from both domestic futures and Taiwan stocks. Returned `TimeInForce` includes G=GTC, but the create table lists only ROD/IOC/FOK; report decoding does not prove a GTC create input is supported. Retain `FCM` and original sequence in reconciliation; do not infer private gateway calls from returned fields.
 
-No dedicated overseas quote or historical-data facade is established by this manual. `FutQuote` and raw TAIFEX examples concern domestic futures. Do not invent `OvfutQuote`, `OvfutData` or route overseas symbols through domestic quotes without additional documentation.
+No dedicated overseas quote or historical-data facade has been verified here. `FutQuote` and raw TAIFEX workflows concern domestic futures. Do not invent `OvfutQuote`, `OvfutData` or route overseas symbols through domestic quotes without additional interface confirmation.

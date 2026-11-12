@@ -1,6 +1,6 @@
 # Original Taiwan website index
 
-This link map was reviewed 2026-09-04, when the release page listed V2.1.1 (2026-08-27). The current skill baseline is the supplied v1.37 manual, whose release section includes V2.1.2; see [manual source and all-market section map](manual-baseline.md). The links below are Taiwan-specific; do not invent corresponding US/futures URLs by string substitution.
+Use this map to locate public Taiwan API pages. Source availability and evidence scope are covered in [source verification](source-verification.md); the list is not a claim that every page has been rechecked for the current SDK. For other markets, start from the [US index](https://superpy.kgieworld.com.tw/kgipythonapi/guide/us/member) or [domestic futures index](https://superpy.kgieworld.com.tw/kgipythonapi/guide/fut/member), and do not invent URLs by string substitution.
 
 ## Start and session
 

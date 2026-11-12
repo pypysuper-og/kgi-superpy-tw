@@ -1,6 +1,6 @@
 # Taiwan securities order API
 
-Source: v1.37, TOC 27–59. Other markets have separate references.
+Taiwan securities development reference; use the public [order links](official-index.md#orders) for the affected contract. Other markets have separate references.
 
 `api.Order` is initialized after `api.set_Account(account)`.
 

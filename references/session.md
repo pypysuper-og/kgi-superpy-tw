@@ -1,6 +1,6 @@
 # Session and environment API
 
-Source: v1.37, TOC 9–26; see [manual baseline](manual-baseline.md) for version conflicts.
+Use the public function links below and [source verification](source-verification.md) to check the target SDK and environment.
 
 <a id="tw-workflow"></a>
 
@@ -44,13 +44,13 @@ flowchart TD
 
 - Package: `kgisuperpy`
 - Install command: `python -m pip install kgisuperpy`
-- Documented Python: 64-bit Python 3.9 through 3.14 in the Taiwan/futures requirements. The manual attributes 3.14 support to SDK V2.1.2; the US table still says 3.13 but its later version check says 3.14. Verify the installed SDK/platform instead of treating this as a runtime test
+- Python: verify the installed SDK/platform. The [official release page](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/version) lists Python 3.14 support for SDK V2.1.2; a release note is not a runtime compatibility test.
 - Documented Windows: 64-bit Windows 10 or later
 - Documented Linux: Red Hat 7 or Ubuntu 20 or later, with KGI `libCGCrypt.so` and certificate utility installed
 - Production use requires a KGI account, API eligibility, accepted service documents, and an active CA certificate.
 - Taiwan securities simulation: business days 08:30 through 05:00 the next day. Futures simulation: business days 10:00–22:00. These are test-service windows, not production exchange hours.
 - The testing terms specify Taiwan-only IP during 08:00–20:00; they do not establish access permissions outside that interval.
-- US stocks: the manual explicitly says simulation is not offered. Generic testing paragraphs that follow do not override that statement. Never switch to production merely to make a test work.
+- US stocks: the [public service terms](https://superpy.kgieworld.com.tw/kgipythonapi/guide/us/terms) state that simulation is not offered. Never switch to production merely to make a test work.
 - Testing instructions say to separate stock, futures and sub-brokerage accounts and keep order-test intervals greater than one second. This is a documented test condition, not an established universal production rate limit.
 - Sub-brokerage API eligibility requires manual application through the sales representative; do not assume securities API activation enables every market.
 - The official terms conditionally say that users with functional-testing needs can apply to a relevant KGI unit for a test account. This is not stated as a universal requirement for simulation use.
@@ -58,7 +58,7 @@ flowchart TD
 
 ## CA setup details
 
-Windows: use the provider certificate component, apply for the certificate, then its certificate environment checker. Linux: install `libCGCrypt.so` with executable permissions in the distribution-appropriate library directory and run the provider `KGI_CGCrypt genDat` utility; the manual identifies `CGSetCertConfig [ 0 ]` as certificate installation success. Certificate installation success is separate from API login success. Renewal instructions remove the old certificate before reinstalling; do not delete a working certificate without explicit scope and a recoverable replacement.
+Use KGI's current platform-specific certificate setup and environment checks. Certificate installation success is separate from API login success. Do not delete a working certificate without explicit scope and a recoverable replacement.
 
 ## Account activation and processing delay
 

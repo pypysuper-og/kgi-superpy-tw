@@ -1,6 +1,6 @@
 # 複委託委託查核與非同步回報
 
-適用美股 `SubOrder`／`SubAccount`。公開欄位以使用手冊 v1.37 為基線；下列 SDK 內部行為由 2.1.2 原始碼核對，屬版本特定觀察，不代表其他版本保證。不得直接操作 SDK 私有快取或底層元件來繞過公開 API。
+適用美股 `SubOrder`／`SubAccount`。介面查證從 [公開美股 API 頁面](https://superpy.kgieworld.com.tw/kgipythonapi/guide/us/member) 與目標 SDK 版本開始；下列 SDK 內部行為由 2.1.2 原始碼核對，屬版本特定觀察，不代表其他版本保證。不得直接操作 SDK 私有快取或底層元件來繞過公開 API。
 
 ## 查哪一個來源
 

@@ -1,6 +1,6 @@
 # Realtime quote APIs
 
-Source: v1.37 quote sections, TOC 227–319. For event enums and recovery, read [quote events](quote-events.md).
+Use the public links below to verify the affected quote interface. For event enums and recovery, read [quote events](quote-events.md).
 
 ## Processed Taiwan `Quote`
 
@@ -26,7 +26,7 @@ if keys:
 api.Quote.unsubscribe_all()
 ```
 
-`set_cb_event` receives connection, subscription, timeout, backpressure, callback, and reconnect events. The manual processed status appendix contains `Q001` through `Q045`.
+`set_cb_event` receives connection, subscription, timeout, backpressure, callback, and reconnect events. Check status codes against the target SDK and the public event page.
 
 ### Index symbols need their own subscription evidence
 
@@ -54,7 +54,7 @@ An active strategy card should show its own mode's price and source time, with w
 | `FutQuote` | `subscribe_bidask(symbol)` | `BidAsk_Future_v0` |
 | `FutQuote` | `subscribe_all(symbol)` | `All_Future_v0` |
 
-`USQuote` setters: `set_cb_tick`, `set_cb_bidask`, `set_cb_kbar`, `set_cb_event`. `FutQuote` setters: `set_cb_tick`, `set_cb_bidask`, `set_cb_event`; no futures `subscribe_kbar` or `set_cb_kbar` established here. No processed `set_cb_all` is established in the manual, despite combined subscriptions being documented. Do not invent it.
+`USQuote` setters: `set_cb_tick`, `set_cb_bidask`, `set_cb_kbar`, `set_cb_event`. `FutQuote` setters: `set_cb_tick`, `set_cb_bidask`, `set_cb_event`; no futures `subscribe_kbar` or `set_cb_kbar` established here. A combined subscription does not establish a processed `set_cb_all` method. Do not invent it.
 
 All three processed facades have `get_subscriptions()`, `unsubscribe(key)`, `unsubscribe_all()`. Use keys read from the same instance; never assume a symbol alone is a key. Examples:
 
@@ -105,19 +105,18 @@ status = kgi.SWQuote_status_remarks(data.status_remarks)
 raise_fall = kgi.SWQuote_raise_fall_remarks(data.raise_fall_remarks)
 ```
 
-The manual raw status appendix contains `SW000` through `SW011`.
+Check raw status codes against the target SDK and the public event page.
 
 ## Connection and subscription limits
 
-The v1.37 membership table states:
+The public [Taiwan membership page](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/member), checked on 2026-11-13, lists:
 
 | Tier | Maximum connections | Symbols per connection |
 | --- | --- | --- |
 | 尊爵 | 9 | 100 |
 | 菁英 | 3 | 50 |
-| 新星 | 2 | 30 |
 
-The connection chapters describe A+ as 9 × 100 = 900 symbols but demonstrate only seven API instances. Seven is an example, not the tier limit. Treat these as versioned entitlements, not confirmed current account permissions. Do not assume processed/raw or separate markets have independent additive quotas; use actual entitlement and server responses. A multi-connection example is not authorization to open multiple production sessions.
+Published tier limits do not confirm an individual account's permissions. Do not assume processed/raw or separate markets have independent additive quotas; use actual entitlement and server responses. A multi-connection example is not authorization to open multiple production sessions.
 
 ## Official pages
 

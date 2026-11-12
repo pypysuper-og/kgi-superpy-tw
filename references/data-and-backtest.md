@@ -1,6 +1,6 @@
 # Data, MSMP, and backtest API
 
-Source: v1.37, TOC 320–383. Dataset names, times and fee defaults below are manual snapshots, not current market-rule or freshness guarantees.
+Use the public catalog links below and the target SDK to confirm dataset contracts. Dataset names, times and fee defaults in these notes are reference values, not current market-rule or freshness guarantees.
 
 The public Taiwan Data/MSMP catalogs were checked for the index-specific entries below on 2026-11-02. Runtime observations are labeled separately from those documented call shapes.
 
@@ -32,7 +32,7 @@ Documented date arguments use `yyyyMMdd`.
 
 ## Practical Taiwan dataset arguments
 
-Get the exact current catalog via `api.Data.get_table()` before using a dataset not already bound to the target version. A target SDK may print the catalog and return `None`; inspect that output before deciding an entry is absent. Selected manual entries, plus the index-history entry verified in the [public catalog](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/getTable):
+Get the exact current catalog via `api.Data.get_table()` before using a dataset not already bound to the target version. A target SDK may print the catalog and return `None`; inspect that output before deciding an entry is absent. Selected dataset entries, including the index-history entry listed in the [public catalog](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/getTable):
 
 | Dataset | Positional arguments after table |
 | --- | --- |
@@ -114,7 +114,7 @@ payload = api.MSMP.msmp_to_dic(
 )
 ```
 
-`msmp_to_dic(names, *dataframes, startday=None)` returns a dictionary keyed by symbol with `date`, `id`, named input columns and `adjclose`, `adjopen`, `adjhigh`, `adjlow`. It filters suspended dates. `names` and DataFrames correspond positionally. The manual defines output `qty` as shares; do not reuse it directly as a Taiwan board-lot order quantity.
+`msmp_to_dic(names, *dataframes, startday=None)` returns a dictionary keyed by symbol with `date`, `id`, named input columns and `adjclose`, `adjopen`, `adjhigh`, `adjlow`. It filters suspended dates. `names` and DataFrames correspond positionally. Confirm the output `qty` unit; do not reuse it directly as a Taiwan board-lot order quantity.
 
 ## US data and USMSMP
 
@@ -126,9 +126,9 @@ us_intraday = api.USData.get("取得全天含盤前盤後歷史分k(最後交易
 us_close = api.USMSMP.get("日_K", "Close")
 ```
 
-The intraday market argument is F=full day, P=premarket, M=regular session, A=after-hours. Use the catalog name without the trailing space accidentally shown in a manual example. `取得歷史1/3/5/15/30/60分K` takes symbol and minutes; `批次取得個股盤中最新行情` takes a symbol list.
+The intraday market argument is F=full day, P=premarket, M=regular session, A=after-hours. Use exact current catalog names. `取得歷史1/3/5/15/30/60分K` takes symbol and minutes; `批次取得個股盤中最新行情` takes a symbol list.
 
-`USData.get_snapshots` exists, but its varargs example and list parameter table conflict. Resolve its public signature against the target version before generating the call; do not invent a `symbol=` keyword from the Taiwan interface.
+Verify whether the target `USData.get_snapshots` signature accepts varargs or a list before generating the call; do not invent a `symbol=` keyword from the Taiwan interface.
 
 `USMSMP.get_table()` gives exact tables/fields; `USMSMP.get(table, name)` and property access are shown. Its ProboDataFrame alignment matches the documented common behavior. `USMSMP.msmp_to_dic(names, *dataframes, startday=...)` returns per-symbol frames with `date`, `id`, named columns, **`Close` and `Open`**; do not assume Taiwan `adjclose`/`adjopen` columns. The description mentions adjusted prices, but the field table does not establish a corporate-action adjustment guarantee for US output.
 
@@ -136,11 +136,11 @@ The intraday market argument is F=full day, P=premarket, M=regular session, A=af
 
 Use `api.Data`, not an invented `FutData`. Catalog entries include `期貨商品基本資訊`, `台指期日K`, `台指期週K`, `台指期月K`, and their `(夜盤)` versions. The K datasets take a futures symbol/alias. `取得台指近日盤歷史分K` and `取得台指近夜盤歷史分K` take minutes (1/3/5/15/30/60).
 
-Manual examples use `TXF` or a dated contract. Distinguish continuous/nearby historical series from a specific tradable expiry. No futures MSMP or overseas-futures dataset facade is established in this manual.
+Distinguish continuous/nearby historical series from a specific tradable expiry. No futures MSMP or overseas-futures dataset facade has been verified here; do not construct one by analogy.
 
 ## Expected update times
 
-These are the manual's stated processing schedules; it does not explicitly establish the timezone or a guaranteed deadline. Verify the dataset's actual observation/publication dates before using it.
+Check the [public update-schedule page](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/databaseUpdateTime) and the dataset's actual observation/publication dates. Reference times below do not establish a timezone or guaranteed deadline.
 
 | Market / data | Stated update |
 | --- | --- |
@@ -155,7 +155,7 @@ These are the manual's stated processing schedules; it does not explicitly estab
 | Domestic futures day-session OHLCV | Business day 19:00 |
 | Domestic futures night-session OHLCV | Business day 09:00 |
 
-The manual allows delays caused by exchange announcements, transfer processing or communications. A schedule does not prove the dataset is fresh. Forward-filling and period-to-trading-date conversion do not independently prove point-in-time availability; guard against look-ahead bias when aligning fundamentals and signals.
+A schedule does not prove the dataset is fresh. Forward-filling and period-to-trading-date conversion do not independently prove point-in-time availability; guard against look-ahead bias when aligning fundamentals and signals.
 
 ## Backtest
 
@@ -196,7 +196,7 @@ result = api.backtest(
 )
 ```
 
-`qty` is a column name despite an inconsistent int type cell. `earn`, `loss` and `moveloss` use percentage points (20 means 20%), whereas `fee`, `tax` and `slippage` use fractions (0.001 means 10 bp). Fee/slippage apply on entry and exit. Use explicit cost assumptions; Taiwan defaults are not a current statutory-rate guarantee and must not be applied to US trades by default. The manual explicitly says US tax must be set by the user.
+`qty` selects the quantity column. `earn`, `loss` and `moveloss` use percentage points (20 means 20%), whereas `fee`, `tax` and `slippage` use fractions (0.001 means 10 bp). Fee/slippage apply on entry and exit. Use explicit cost assumptions for the target market; Taiwan defaults are not a current statutory-rate guarantee and must not be applied to US trades by default.
 
 For a long position, the shown trailing threshold is maximum observed `sig_value` since entry × (1 − 0.01 × moveloss); for short, minimum × (1 + 0.01 × moveloss). Keep signal timing (`open_shift`/`close_shift`) explicit. Backtest fills do not prove executable live order prices or market access.
 
@@ -208,9 +208,9 @@ Result surfaces:
 - `result.daily`: daily account P/L.
 - `result.plotly`: performance figures.
 - `result.dashboard(path=..., view=...)`: HTML/dashboard output.
-- `result.save(save_path=..., fig=False)`: local result export; the manual suggests `kaleido==0.1.0.post1` only as a figure-export troubleshooting workaround. Do not automatically downgrade an unrelated environment; check compatibility first.
+- `result.save(save_path=..., fig=False)`: local result export. Check figure-export dependency compatibility before changing the environment; do not automatically downgrade unrelated dependencies.
 
-For notebook Plotly display failures caused by missing `nbformat`, the manual suggests installing it. `dashboard(view=...)` has a `notebook`/`Notebook` spelling conflict; verify the target API if that mode is required. These export dependencies are unrelated to brokerage-login success.
+For notebook Plotly display failures, check the actual dependency error and target API, including the accepted `dashboard(view=...)` spelling. These export dependencies are unrelated to brokerage-login success.
 
 ## Official pages
 

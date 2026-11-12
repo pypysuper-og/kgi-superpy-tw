@@ -8,7 +8,6 @@
       "references/data-and-backtest.md": "4061404e0f9b29b533e401abc6ae8f59b6dc577b972ffc7b15778f6070abad28",
       "references/diagnostics-support.md": "f73eb04fcf69ccdbcdaa421acd21d88bb5493e816f294dfaa25993b5cb1468cb",
       "references/domestic-futures.md": "c662692a6923b20c6a1dbf7ab089340379741f3222513e1c7b90b916e6628932",
-      "references/manual-baseline.md": "5fce5bae9652b9f320956bdcba81988d0b206e648958637ac0bcdb6a641779f7",
       "references/official-index.md": "85b6b45ce4182feb05a87cddd87339fb98c6be8b8c93737cc8c8b853eeeb8dae",
       "references/order-lifecycle.md": "b3f18f880d0b47de007eebb87562c1e863653505296cb654c7c1058412ff48c0",
       "references/orders.md": "4f220bde259f09c5ed402901cc61267962cfb995cc942f07a58f590327c5b7b5",
@@ -42,7 +41,6 @@
       "references/domestic-futures.md": "8585694bb348a2f815bff087210643b9aafd8f8f2b2b5a190fccbc9e51412fd5",
       "references/frontend-evolution.md": "e87493460c3824714534249da2d4402d274145ff5105baecd09a0f50a069a800",
       "references/human-agent-development.md": "43440420674957940670f6fa9842422a7b0536c6f7524a4c99e181e4b0069856",
-      "references/manual-baseline.md": "74e8345c018a55b868bd23c32dffb7fb30c262baba0bd7fd1e3611913fa656d6",
       "references/official-index.md": "cdd783d6b41a0672f9c81f455e2b9ffb3a5a487264a96fd1db718d53dddb80c3",
       "references/order-lifecycle.md": "f8cd2eb27de8c670cdce575476995a2946a8adc079d7f91f342ff7274932b56e",
       "references/orders.md": "ec8f1cdb8b53f87c6a05ca9c397475e1c23db6e00a88508ff046e4e47dd0cac6",
@@ -128,7 +126,6 @@
     "references/domestic-futures.md": "8585694bb348a2f815bff087210643b9aafd8f8f2b2b5a190fccbc9e51412fd5",
     "references/frontend-evolution.md": "ccf9f75ea91ec70c40cbf351d88c58666f60eadd47d979094601b5a0f842753b",
     "references/human-agent-development.md": "340cefe58d69d15260c9025a79723355fc8454452f9aedaa2d41076c56627706",
-    "references/manual-baseline.md": "74e8345c018a55b868bd23c32dffb7fb30c262baba0bd7fd1e3611913fa656d6",
     "references/official-index.md": "cdd783d6b41a0672f9c81f455e2b9ffb3a5a487264a96fd1db718d53dddb80c3",
     "references/order-lifecycle.md": "f8cd2eb27de8c670cdce575476995a2946a8adc079d7f91f342ff7274932b56e",
     "references/orders.md": "ec8f1cdb8b53f87c6a05ca9c397475e1c23db6e00a88508ff046e4e47dd0cac6",
@@ -145,6 +142,10 @@
     "references/web-oco-application.md": "a389ffd7fc26c25e2ed94373051e778db26a7450967ff29fbd32bcda77519d67",
     "examples/practical_cases.py": "e54300f7e717b4c4170c1b13ad877dfd5eacd4fcce0b1c414efec42b2d7d6eea",
     "examples/test_practical_cases.py": "a1f7675d5acce542d23f20e81461af9c1f8dfc5b3ac2d59631489939f0644c69"
+  },
+  "public_view": {
+    "omitted_historical_source_entries": 3,
+    "note": "Some source metadata is omitted from this public view. Remaining hashes identify the original evaluated candidates, not the current skill; they have not been recalculated."
   },
   "final_native_behavioral_reevaluation": false,
   "final_verification": "19 synthetic model tests; seven reconstructed guard defects caught; no broker operations"

@@ -59,4 +59,4 @@ python -B -X utf8 -m unittest discover -s examples -p test_practical_cases.py -v
 
 這是正規化事件與本機 SQLite 的離線證據。示範採一筆固定委託，只列出最小配對條件；真實 adapter 還需核對市場、交易別、原單數量與日期等契約。未知分支只驗證不重送，未建模未知結果經可靠報表恢復配對的正向流程。它未驗證原始 callback 格式、CA、券商實際受理、撮合或跨日原單重接，也不會從重啟自動恢復已遺失的記憶體 Trade 關聯。模型不包含 SDK，這是程式結構的界線，並非連線測試結果。
 
-官方接點：[複委託 API](https://superpy.kgieworld.com.tw/kgipythonapi/guide/us/)。精確方法及參數以 [美股市場參考](../us-stocks.md) 和適用版本手冊為準。
+官方接點：[複委託 API](https://superpy.kgieworld.com.tw/kgipythonapi/guide/us/member)。精確方法及參數依 [美股市場參考](../us-stocks.md) 定位，再核對公開官方功能頁與目標 SDK 版本。

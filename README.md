@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0f766e" alt="MIT 授權"></a>
-  <img src="https://img.shields.io/badge/Skill-1.37.16-0891b2" alt="Skill 版本 1.37.16">
+  <img src="https://img.shields.io/badge/Skill-1.37.17-0891b2" alt="Skill 版本 1.37.17">
   <img src="https://img.shields.io/badge/社群貢獻-非官方-475569" alt="非官方社群貢獻">
   <img src="https://img.shields.io/badge/README-繁體中文-0f766e" alt="繁體中文 README">
 </p>
@@ -62,6 +62,8 @@
 ### 1. 把 Skill 加入你的 AI 開發環境
 
 本 repo 根目錄就是完整的 `kgi-superpy-tw` Skill，包含 `SKILL.md`、`references/` 與 Codex 顯示設定。
+
+也可從 [最新發行版](https://github.com/pypysuper-og/kgi-superpy-tw/releases/latest) 下載完整 Skill，依使用工具的安裝方式載入。
 
 **在 Codex 對話中安裝**
 
@@ -149,7 +151,7 @@ python -m pip install kgisuperpy
 | 市場 | 已整理的開發主題 | 使用時要留意 |
 | --- | --- | --- |
 | 台灣證券 | 委託、改撤單、帳務、行情、歷史資料與回測 | 委託數量與回測數量不能直接互換 |
-| 美股複委託 | `SubOrder`／`SubAccount`、`USQuote`、`USData`／`USMSMP` | 手冊基準明載不提供美股模擬；改單採取消後重建 |
+| 美股複委託 | `SubOrder`／`SubAccount`、`USQuote`、`USData`／`USMSMP` | 不提供美股模擬；改單採取消後重建 |
 | 國內期貨／選擇權 | `FutOrder`／`FutAccount`、`FutQuote`、原始行情與歷史資料 | 行情別名與實際交易契約需分開處理 |
 | 海外期貨／選擇權 | `OvfutOrder`／`OvfutAccount`、商品契約與回報 | 此 Skill 尚未建立海外行情／歷史資料介面的文件契約 |
 
@@ -173,13 +175,13 @@ python -m pip install kgisuperpy
 | 實務案例、狀態機與模組互動 | [串接開發實務](references/practical-development.md) · [狀態與模組協作](references/application-state-models.md) |
 | 交易介面與設計取捨 | [交易 UIUX 指南](references/trading-uiux.md) · [前端演進](references/frontend-evolution.md) |
 | 與 AI 一起釐清需求、檢查假設與驗證 | [實務工程夥伴](references/human-agent-development.md) |
-| 文件版本、矛盾與來源 | [手冊基準](references/manual-baseline.md) · [官方連結索引](references/official-index.md) |
+| 來源查證與適用範圍 | [來源與驗證](references/source-verification.md) · [官方連結索引](references/official-index.md) |
 
 README 與使用情境採繁體中文；部分技術參考採英文，保留 API 拼字與欄位名稱，方便助手查閱及程式對照。你仍可要求助手全程以繁體中文解釋。
 
 ## 版本與使用邊界
 
-- **Skill 版本：`1.37.16`。** 文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
+- **Skill 版本：`1.37.17`。** Skill 與 SuperPy SDK 各自維護版本；功能依據與實際驗證範圍，詳見 [來源與驗證](references/source-verification.md)。
 - **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
 - **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
 - **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。
@@ -194,6 +196,6 @@ README 與使用情境採繁體中文；部分技術參考採英文，保留 API
 
 ## 授權與致謝
 
-本專案原創的 Skill 指引與整理內容採 [MIT License](LICENSE)。SuperPy SDK、官方文件、商標與第三方素材的權利仍屬各自權利人；本授權不替它們重新授權。Repo 不包含官方手冊原檔、SDK 安裝包、帳戶資料或憑證。
+本專案原創的 Skill 指引與整理內容採 [MIT License](LICENSE)。SuperPy SDK、官方文件、商標與第三方素材的權利仍屬各自權利人；本授權不替它們重新授權。Repo 不包含 SDK 安裝包、帳戶資料或憑證。
 
 感謝凱基提供 SuperPy API 與文件，也歡迎社群一起補齊實際整合時需要的知識。封面以 AI 生成，僅供本社群專案視覺呈現，非官方品牌素材；[製作說明](assets/README.md)。

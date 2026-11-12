@@ -1,6 +1,6 @@
 # Account query API
 
-`api.Account` is initialized after `api.set_Account(account)`. Most results are pandas-style tables; `SettleAmtTrial` examples return grouped `Detail1`/`Detail2` results. Source: v1.37, TOC 148–173.
+`api.Account` is initialized after `api.set_Account(account)`. Most results are pandas-style tables; `SettleAmtTrial` examples return grouped `Detail1`/`Detail2` results. Confirm the target version through the public [account links](official-index.md#account).
 
 | Method | Inputs | Purpose |
 | --- | --- | --- |
