@@ -1,129 +1,194 @@
 <p align="center">
-  <img src="assets/hero.png" alt="KGI SuperPy Skill：把 SuperPy 實戰經驗，裝進你的 AI" width="100%">
+  <img src="assets/hero.png" alt="KGI SuperPy Skill：結合台灣、Python 與 API 連結意象的社群專案封面" width="100%">
 </p>
 
-<h1 align="center">把 SuperPy 實戰經驗，裝進你的 AI。</h1>
+<h1 align="center">讓 AI 更懂 SuperPy，讓你專注把交易工具做出來。</h1>
 
 <p align="center">
-  你的想法，值得一個懂 SuperPy 的開發夥伴。<br>
-  從 API 串接、交易流程到操作介面，<br>
-  <strong>把實務知識帶進每一次協作，一起做出屬於你的交易工具。</strong>
+  為台灣開發者整理的 <strong>凱基（KGI）SuperPy API 社群 Skill</strong><br>
+  把 API 文件、市場差異與整合經驗，變成 AI 助手寫程式時可查用的知識。
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0f766e" alt="MIT 授權"></a>
   <img src="https://img.shields.io/badge/Skill-1.37.16-0891b2" alt="Skill 版本 1.37.16">
-  <img src="https://img.shields.io/badge/社群維護-非官方-475569" alt="社群維護，非官方產品">
+  <img src="https://img.shields.io/badge/社群貢獻-非官方-475569" alt="非官方社群貢獻">
+  <img src="https://img.shields.io/badge/README-繁體中文-0f766e" alt="繁體中文 README">
 </p>
 
 <p align="center">
-  <a href="#quick-start"><img src="https://img.shields.io/badge/開始打造你的交易工具-0f766e?style=for-the-badge" alt="開始打造你的交易工具"></a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/pypysuper-og/kgi-superpy-tw/releases/latest">下載 Skill</a> ·
-  <a href="#in-practice">看看實務底氣</a> ·
+  <a href="#quick-start">快速開始</a> ·
+  <a href="#try-it">直接試問</a> ·
+  <a href="#coverage">涵蓋範圍</a> ·
+  <a href="#references">文件導覽</a> ·
   <a href="CONTRIBUTING.md">一起貢獻</a>
 </p>
 
 ---
 
-## 你的策略。你的介面。你的交易工具。
+## 從「幫我寫一段 API」到「先把市場與流程搞清楚」
 
-你知道自己想看什麼、怎麼操作、什麼時候需要提醒。**SuperPy Skill 為你的 AI 開發助手補上 API 知識與應用經驗，陪你把這些想法逐步做成工具。**
+用 AI 串接交易 API，難的常常不是 Python 語法，而是細節：帳號選對了嗎？台股和美股的改單方式一樣嗎？方法已回傳，代表委託成功，還是只是等待處理？
 
-- **一眼掌握重點的行情看板** — 把關注商品、價格與狀態，整理成自己習慣的工作畫面。
-- **符合自己規則的網格工作台** — 從參數設定、委託追蹤到異常處理，把策略想法轉成開發需求。
-- **看得懂、用得順的部位監控** — 用泡泡或列表掌握部位，清楚呈現出場條件與監控狀態。
+**KGI SuperPy Skill 把這些容易踩到的差異，整理成 AI 助手能按需求查閱的指引。** 你可以用繁體中文描述需求，讓助手依市場、操作與文件版本找出對應規則，再協助撰寫、檢查或排查程式。
 
-第一次動手、有程式想改善，或正在排查一個難解的問題，都能從手上的需求開始。
+適合正在做這些事的你：
 
-## 給 AI 知識，也給它實務眼光。
+- **第一次串接 SuperPy**：釐清安裝、憑證、登入、選帳號與登出的順序。
+- **用 AI 開發行情或交易工具**：讓生成的程式有文件依據，少靠名稱猜 API。
+- **從台股擴展到美股或期貨**：先辨認市場差異，再處理委託、帳務與回報。
+- **維護既有 Python 專案**：檢查回呼、委託狀態、斷線恢復與去識別化診斷紀錄。
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>接對 API，掌握市場差異</h3>
-      <p>整理市場別的串接知識，讓 AI 從帳戶、行情到委託，依你的需求查找有依據的做法。</p>
-      <p><strong>從一開始，就有脈絡可循。</strong></p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>看懂流程，接起功能前後</h3>
-      <p>把狀態機、模組分工與互動關係連起來，協助 AI 思考成交晚到、斷線恢復與監控延續。</p>
-      <p><strong>細節有去處，問題有追查方向。</strong></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>設計介面，貼近實際操作</h3>
-      <p>從網格與泡泡介面的演進，帶入資訊分層、操作回饋與監控視圖的設計思路。</p>
-      <p><strong>畫面有重點，操作有回應。</strong></p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>關鍵時刻，多一份工程判斷</h3>
-      <p>提醒 AI 回頭看功能目的、檢查假設，並找出值得驗證的下一步。你的策略與取捨，仍由你作主。</p>
-      <p><strong>像有位實務夥伴，陪你多想一步。</strong></p>
-    </td>
-  </tr>
-</table>
+> 本專案由社群整理與維護，未受凱基官方背書。這是一套給 AI 助手使用的指引與參考文件；SuperPy SDK、券商服務與開通資格仍由官方提供。安裝 Skill 本身不會連線券商或執行交易。
 
-<a id="coverage"></a>
+## 這個 Skill 帶來什麼？
 
-<p align="center">
-  <strong>四大市場的 API 開發指引</strong><br>
-  台股 · 美股複委託 · 國內期貨／選擇權 · 海外期貨／選擇權
-</p>
+| 開發時常見的問題 | Skill 提供的協助 |
+| --- | --- |
+| 文件很多，不知道先讀哪一段 | 依市場與操作分流，從登入、下單、帳務到行情與回測逐步定位 |
+| AI 寫出看似合理、其實不存在的方法 | 保留方法名稱、參數與來源；文件有矛盾時明確標示待查證處 |
+| 把「方法回傳」誤當成「已成交」 | 區分方法返回、操作回報、委託狀態與成交證據 |
+| 跨市場時沿用錯誤假設 | 分開整理帳號選擇、數量單位、委託識別與改撤單語意 |
+| 發生問題，只剩一句「送單失敗」 | 提供操作關聯、狀態追蹤、敏感資訊遮蔽與診斷順序的設計參考 |
 
-<a id="in-practice"></a>
-
-## 實戰的份量，藏在這些細節裡。
-
-來自台美股示範程式的開發、除錯、測試與諮詢經驗，整理成 **三個完整案例**。每個案例都有情境、處理思路與可執行的離線範例，讓 AI 有具體經驗可以參考：
-
-- [**單號還沒回來，程式該怎麼接著做？**](references/cases/us-delayed-identity.md)
-- [**撤單送出了，為什麼成交又來了？**](references/cases/oco-cancel-late-fill.md)
-- [**資料還沒齊，已發生的成交怎麼辦？**](references/cases/observe-before-eligibility.md)
-
-這些案例使用合成資料重現關鍵情境；實務案例目前以台美股為主。
-
-> **把一次次解過的問題，變成下一次開發的起點。**
+Skill 的作用是提供更有依據的開發脈絡；實際程式仍需依你的 SDK 版本與環境驗證。
 
 <a id="quick-start"></a>
 
-## 現在，帶著你的想法開始。
+## 快速開始
 
-### 1. 幫你的 AI 加上 SuperPy Skill
+### 1. 把 Skill 加入你的 AI 開發環境
 
-使用支援 Skill 的 AI 開發助手，可以先把這段話交給它：
+本 repo 根目錄就是完整的 `kgi-superpy-tw` Skill，包含 `SKILL.md`、`references/` 與 Codex 顯示設定。
+
+**在 Codex 對話中安裝**
 
 ```text
-請從 https://github.com/pypysuper-og/kgi-superpy-tw
-安裝 kgi-superpy-tw skill。
+請使用 $skill-installer，從 https://github.com/pypysuper-og/kgi-superpy-tw
+安裝 repo 根目錄的 skill，名稱為 kgi-superpy-tw。
 ```
 
-也可以從 [GitHub Releases 下載](https://github.com/pypysuper-og/kgi-superpy-tw/releases/latest)，依使用工具的 Skill 安裝方式加入。
+**或在 Windows PowerShell 手動安裝**（需先安裝 Git）：
+
+```powershell
+$skillDir = Join-Path $HOME '.agents\skills\kgi-superpy-tw'
+if (Test-Path -LiteralPath $skillDir) {
+    throw "目標已存在，請先確認既有版本與本機修改：$skillDir"
+}
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $skillDir) | Out-Null
+git clone https://github.com/pypysuper-og/kgi-superpy-tw.git $skillDir
+if ($LASTEXITCODE -ne 0) { throw 'Skill 下載失敗，請檢查上方錯誤。' }
+```
+
+Codex 的使用者層級 Skill 目錄為 `~/.agents/skills`；安裝後若尚未出現在清單，重新啟動 Codex。詳見 [OpenAI 官方 Skills 說明](https://developers.openai.com/codex/skills/)。若已在其他目錄安裝同名 Skill，請先確認要保留的版本，避免重複載入。
+
+其他支援 `SKILL.md` 的 AI 開發工具，可依各工具的安裝規則載入完整資料夾；工具間的自動觸發與顯示設定可能不同，本 repo 不宣稱已逐一驗證。
+
+### 2. 用一個明確的需求開始
+
+```text
+請使用 $kgi-superpy-tw，幫我規劃台股行情查詢工具。
+先說明必要環境、登入與選帳號順序，再產生程式骨架。
+這次只做程式開發，不執行登入或下單；不確定的 API 請標出文件依據。
+```
+
+你也可以直接說「幫我用凱基 SuperPy 寫一個……」，由支援自動選用 Skill 的助手判斷是否載入。明確指定 `$kgi-superpy-tw` 最容易確認使用的是這份指引。
+
+### 3. 要執行程式時，再準備 SDK 與使用資格
+
+Skill 和 Python 套件是分開安裝的。需要執行 SuperPy 程式時，請依 [官方使用指南](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/) 與 [環境參考](references/session.md)，確認 Python／作業系統相容性、帳戶資格、API 開通與 CA 憑證。
+
+```powershell
+python -m pip install kgisuperpy
+```
+
+以上指令只安裝套件，不代表已完成資格開通、憑證設定或登入驗證。請勿把帳號、密碼或憑證內容貼進公開 Issue。
 
 <a id="try-it"></a>
 
-### 2. 交給它第一個任務
+## 複製這些提問，開始做你的工具
+
+**行情工具**
 
 ```text
-請使用 $kgi-superpy-tw，幫我做一個台股行情觀察看板。
-我想看到關注商品的最新價格、漲跌與連線狀態。
-先釐清畫面和使用方式，再用假資料把操作流程跑通。
+請使用 $kgi-superpy-tw，規劃台股即時行情小工具。
+我要訂閱成交與五檔，請說明回呼註冊、訂閱／取消訂閱與斷線恢復流程。
+先產生程式與離線驗證方式，不連線券商。
 ```
 
-把範例換成你自己的需求。從一個小工具開始，也可以從你現有程式最想改善的地方開始。
+**跨市場程式檢查**
 
-<p align="center">
-  <strong>下一個想做的工具，就從這次對話開始。</strong><br><br>
-  <a href="https://github.com/pypysuper-og/kgi-superpy-tw/releases/latest"><strong>下載 SuperPy Skill →</strong></a>
-</p>
+```text
+請使用 $kgi-superpy-tw，檢查這段美股複委託程式。
+特別確認選帳號、改單方式與委託識別，不要直接套用台股規則。
+請列出確定的文件依據與需要再確認的地方，不執行交易。
+```
 
----
+**歷史資料與回測**
 
-本專案是社群維護的凱基（KGI）SuperPy API 開發 Skill，非官方產品。SuperPy SDK、API 開通資格與券商服務依官方提供；實際程式仍需按使用環境驗證。
+```text
+請使用 $kgi-superpy-tw，規劃台股歷史資料到回測的流程。
+先確認資料表名稱、更新時間與數量單位，再提出程式骨架。
+請區分文件列出的更新時程與資料實際新鮮度。
+```
+
+**除錯與維護**
+
+```text
+請使用 $kgi-superpy-tw，協助分析已去識別化的委託事件。
+目前方法已返回，但沒有確認委託成功。
+請區分可證實事實、推論與缺少的證據，提出查核步驟，不自動重送。
+```
+
+<a id="coverage"></a>
+
+## 一份 Skill，按四個市場分別理解
+
+| 市場 | 已整理的開發主題 | 使用時要留意 |
+| --- | --- | --- |
+| 台灣證券 | 委託、改撤單、帳務、行情、歷史資料與回測 | 委託數量與回測數量不能直接互換 |
+| 美股複委託 | `SubOrder`／`SubAccount`、`USQuote`、`USData`／`USMSMP` | 手冊基準明載不提供美股模擬；改單採取消後重建 |
+| 國內期貨／選擇權 | `FutOrder`／`FutAccount`、`FutQuote`、原始行情與歷史資料 | 行情別名與實際交易契約需分開處理 |
+| 海外期貨／選擇權 | `OvfutOrder`／`OvfutAccount`、商品契約與回報 | 此 Skill 尚未建立海外行情／歷史資料介面的文件契約 |
+
+另提供台股本機 Web UI、OCO（停損／停利擇一觸發）、資料保存、重連與診斷紀錄的**設計參考**。這些內容沒有附可直接啟動的交易應用，也不代表券商端提供 OCO 服務。
 
 <a id="references"></a>
 
-[給 AI 的使用指引](SKILL.md) · [版本說明與下載](https://github.com/pypysuper-og/kgi-superpy-tw/releases) · [回報問題](https://github.com/pypysuper-og/kgi-superpy-tw/issues) · [貢獻指南](CONTRIBUTING.md) · [MIT 授權](LICENSE)
+## 文件導覽
+
+從 [SKILL.md](SKILL.md) 進入，或直接閱讀你需要的主題：
+
+| 想了解什麼 | 參考文件 |
+| --- | --- |
+| 安裝、資格、憑證、登入與選帳號 | [Session 與環境](references/session.md) |
+| 台股下單與帳務 | [委託 API](references/orders.md) · [帳務 API](references/accounts.md) |
+| 方法返回、委託成功、成交的差別 | [委託生命週期與診斷](references/order-lifecycle.md) |
+| 美股、國內期權、海外期權 | [美股複委託](references/us-stocks.md) · [國內期權](references/domestic-futures.md) · [海外期權](references/overseas-futures.md) |
+| 行情訂閱、回呼、錯誤與恢復 | [行情](references/quotes.md) · [行情事件](references/quote-events.md) |
+| 歷史資料、MSMP 與回測 | [資料與回測](references/data-and-backtest.md) |
+| 本機交易工具與可追查紀錄 | [Web OCO 設計參考](references/web-oco-application.md) · [診斷與支援](references/diagnostics-support.md) |
+| 文件版本、矛盾與來源 | [手冊基準](references/manual-baseline.md) · [官方連結索引](references/official-index.md) |
+
+README 與使用情境採繁體中文；部分技術參考採英文，保留 API 拼字與欄位名稱，方便助手查閱及程式對照。你仍可要求助手全程以繁體中文解釋。
+
+## 版本與使用邊界
+
+- **Skill 版本：`1.37.16`。** 文件基準為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
+- **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
+- **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
+- **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。
+
+## 一起讓台灣的 API 開發經驗更好
+
+歡迎補充文件差異、修正參數說明、分享已去識別化的最小重現案例，或改善繁體中文使用體驗。提出修正時，附上 **SDK 版本、作業系統、市場與官方來源**，會更容易確認問題。
+
+- 發現問題：[開啟 Issue](https://github.com/pypysuper-og/kgi-superpy-tw/issues)
+- 想貢獻內容：[閱讀貢獻指南](CONTRIBUTING.md)
+- 覺得有幫助：給專案一顆 Star，讓更多台灣開發者找到這份資源。
+
+## 授權與致謝
+
+本專案原創的 Skill 指引與整理內容採 [MIT License](LICENSE)。SuperPy SDK、官方文件、商標與第三方素材的權利仍屬各自權利人；本授權不替它們重新授權。Repo 不包含官方手冊原檔、SDK 安裝包、帳戶資料或憑證。
+
+感謝凱基提供 SuperPy API 與文件，也歡迎社群一起補齊實際整合時需要的知識。封面以 AI 生成，僅供本社群專案視覺呈現，非官方品牌素材；[製作說明](assets/README.md)。
