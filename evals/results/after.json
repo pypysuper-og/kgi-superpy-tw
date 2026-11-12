@@ -1,0 +1,138 @@
+{
+  "answers": [
+    {
+      "id": "delayed-identity",
+      "answer": {
+        "retain_returned_trade": true,
+        "automatically_resubmit": false,
+        "treat_empty_id_as_not_sent": false,
+        "mark_filled_now": false
+      },
+      "reason": "保留原可變 Trade 與操作關聯，核對帳戶及會話後接續識別；逾時和空識別不證明未送出，亦尚無成交證據。",
+      "references": [
+        "SKILL.md",
+        "references/cases/us-delayed-identity.md"
+      ]
+    },
+    {
+      "id": "cancel-late-fill",
+      "answer": {
+        "exit_before_cancel_terminal": false,
+        "exit_quantity_shares": 1500,
+        "repeat_cancel_on_timeout": false,
+        "discard_late_fill": false
+      },
+      "reason": "取消方法返回非終態；晚到成交須入帳，待終態與明細對齊後，在既定條件下出場 1500 股。未知結果先查核，不重播撤單。",
+      "references": [
+        "references/cases/oco-cancel-late-fill.md"
+      ]
+    },
+    {
+      "id": "reference-missing",
+      "answer": {
+        "booked_shares": 1000,
+        "position_visible": true,
+        "continue_observation": true,
+        "automatic_exit_allowed": false,
+        "erase_fill_when_reference_missing": false
+      },
+      "reason": "有效成交按 execution ID 去重入帳並持續觀察；缺少參考資料時標示僅監控，暫停依賴它的新自動出場。",
+      "references": [
+        "references/cases/observe-before-eligibility.md"
+      ]
+    },
+    {
+      "id": "command-outcome",
+      "answer": {
+        "first_outcome": "unknown",
+        "second_outcome": "not_executed",
+        "automatically_retry_first": false
+      },
+      "reason": "第一筆已提交但結果發布失敗，從命令回覆角度效果未明，先依操作 ID 和帳本查核；第二筆尚未開始，屬未執行。",
+      "references": [
+        "references/application-state-models.md"
+      ]
+    },
+    {
+      "id": "preserve-position-policy",
+      "answer": {
+        "unit_count": 2,
+        "merge_without_user_decision": false,
+        "replace_policy_because_reference_does_it": false
+      },
+      "reason": "既定政策是每個進場 OrderNo 一個 TradeUnit；同單分批才合算，不能依參考範例或工程偏好逕改。",
+      "references": [
+        "references/human-agent-development.md",
+        "references/frontend-evolution.md"
+      ]
+    },
+    {
+      "id": "guard-purpose",
+      "answer": {
+        "reject_only_due_to_update_date": false,
+        "block_all_report_collection": false,
+        "invent_an_effective_date_field": false,
+        "validate_actual_applicable_rules": true
+      },
+      "reason": "更新時間不保證是規則生效日；應核驗實際適用規則，並保留不依賴此檢查的成交觀察。",
+      "references": [
+        "references/cases/observe-before-eligibility.md"
+      ]
+    },
+    {
+      "id": "original-interface-demo",
+      "answer": {
+        "reuse_maintained_ui_controls": true,
+        "isolated_fake_transport": true,
+        "verify_real_dom_interaction": true,
+        "allow_demo_to_modify_live_ledger": false
+      },
+      "reason": "以隔離假傳輸驅動維護中的原控制項，驗證真實 DOM 操作與顯示流程；展示不得寫入真實帳本。",
+      "references": [
+        "references/frontend-evolution.md"
+      ]
+    },
+    {
+      "id": "workflow-recovery",
+      "answer": {
+        "login_alone_completes_recovery": false,
+        "require_duplicate_user_permission": false,
+        "restore_callbacks_subscriptions_and_reconcile": true,
+        "resume_A_after_requirements_met": true,
+        "resume_user_stopped_B": false,
+        "reset_remaining_budget": false
+      },
+      "reason": "重登後仍需恢復 callback、訂閱、對帳與新鮮行情；依既有協議恢復符合條件的 A，保留 B 停止狀態及剩餘額度 7。",
+      "references": [
+        "SKILL.md",
+        "references/application-state-models.md"
+      ]
+    },
+    {
+      "id": "small-script-control",
+      "answer": {
+        "require_full_state_inventory": false,
+        "require_workbench_ui": false,
+        "require_new_service_or_persistent_wal": false
+      },
+      "reason": "單一已選帳的查詢函式可直接使用公開查詢介面，無需為此建立完整工作台、狀態盤點或持久服務。",
+      "references": [
+        "references/human-agent-development.md"
+      ]
+    },
+    {
+      "id": "conflicting-execution",
+      "answer": {
+        "silently_rewrite_original_cost": false,
+        "book_as_additional_fill": false,
+        "isolate_affected_symbol": true,
+        "continue_confirmed_unaffected_symbol": true
+      },
+      "reason": "同鍵量價矛盾須保留原確認值並標記查核，不得默改或重複入帳；既可定位 A 且無共用不確定性，B 可繼續。",
+      "references": [
+        "references/cases/us-delayed-identity.md",
+        "references/application-state-models.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "before": {
+    "version": "1.37.15",
+    "baseline_commit": "8946ab59b9be1e08a9ffd3bb75c4c585193d0363",
+    "files": {
+      "SKILL.md": "aa34580985249b2a124ca6b5e4b47b94193639c32930eb54b1673622a9d83125",
+      "references/accounts.md": "4bd2c32f041faf3a8d0d9b2e893081c7682181d7855d24d1626d54755229da93",
+      "references/data-and-backtest.md": "4061404e0f9b29b533e401abc6ae8f59b6dc577b972ffc7b15778f6070abad28",
+      "references/diagnostics-support.md": "f73eb04fcf69ccdbcdaa421acd21d88bb5493e816f294dfaa25993b5cb1468cb",
+      "references/domestic-futures.md": "c662692a6923b20c6a1dbf7ab089340379741f3222513e1c7b90b916e6628932",
+      "references/manual-baseline.md": "5fce5bae9652b9f320956bdcba81988d0b206e648958637ac0bcdb6a641779f7",
+      "references/official-index.md": "85b6b45ce4182feb05a87cddd87339fb98c6be8b8c93737cc8c8b853eeeb8dae",
+      "references/order-lifecycle.md": "b3f18f880d0b47de007eebb87562c1e863653505296cb654c7c1058412ff48c0",
+      "references/orders.md": "4f220bde259f09c5ed402901cc61267962cfb995cc942f07a58f590327c5b7b5",
+      "references/overseas-futures.md": "2dae25cf9260448722cc5b0ce98862b615c10403ca1a610c3fd49ce9a2dcd0ce",
+      "references/quote-events.md": "8316e4198016bb42949b3cf9f239a2b63facb78c3071e6a22a7e344d5cc95171",
+      "references/quotes.md": "0a4125e174503956eb799c37a430407e04976d1f1c886ff0b02c473956e0bcaf",
+      "references/session.md": "cd0a9c580ce6988d426d34d1d8c9487ea7f5dce9a6de738137d306081ca8f3f5",
+      "references/technical-notes.md": "fdf14ec91db4f83d513eb6ec10913f3158428ab0823b681b913048cecc2b76b7",
+      "references/trading-uiux.md": "1fe25ee468b0236b2403f3fdd0b02b223032995350ea4a3b6b3369ec83a7fbfd",
+      "references/us-order-diagnostics.md": "1ea883cb48dfd66ff82c15e7939f317ccc271998f9b72c961c9f3e357ae828d8",
+      "references/us-stocks.md": "7e6ebb7eae678fb78f2eef635505195c1c1422fdcf95329242f8d224cc62424b",
+      "references/web-oco-application.md": "e11593ad0f7bf9eef8a875d90ff6a35c48a9dada45831e83bc2eab17eebdb24b"
+    },
+    "input_scope": [
+      "SKILL.md",
+      "references/**/*.md"
+    ]
+  },
+  "after": {
+    "version": "1.37.16",
+    "candidate": "first evaluated candidate",
+    "files": {
+      "SKILL.md": "1a2c5a5a26ee5d9fcefa38960a9bee41faf604cb15c3fc6b0c96acbb4b467155",
+      "references/accounts.md": "5334a40f2aa937c37789ee24c1e446b9650acce09b20e66ca3c9deaff0bf401e",
+      "references/application-state-models.md": "2442c5a6d1560a0efcbe936433392f842bff78ccdf285f878ca8ff6dc0a8f3f4",
+      "references/cases/observe-before-eligibility.md": "308c8fc791cc8a33ab18e0a64fcafe9e9ea975de76419c8a0ad014b6b7a0e049",
+      "references/cases/oco-cancel-late-fill.md": "bfc3232bd09c8b2949678ae94f76c8e7b257b780143c12ae04bd2a096b6e0318",
+      "references/cases/us-delayed-identity.md": "01136a08b099aa94c3cebb05b0858ce15fb5a19f8aa5af6ccd9a687e32084d3f",
+      "references/data-and-backtest.md": "4061404e0f9b29b533e401abc6ae8f59b6dc577b972ffc7b15778f6070abad28",
+      "references/diagnostics-support.md": "5bdf8394ce02028aefd2d48da8aaa64bd861584f79b054ad2c462a1505006f70",
+      "references/domestic-futures.md": "8585694bb348a2f815bff087210643b9aafd8f8f2b2b5a190fccbc9e51412fd5",
+      "references/frontend-evolution.md": "e87493460c3824714534249da2d4402d274145ff5105baecd09a0f50a069a800",
+      "references/human-agent-development.md": "43440420674957940670f6fa9842422a7b0536c6f7524a4c99e181e4b0069856",
+      "references/manual-baseline.md": "74e8345c018a55b868bd23c32dffb7fb30c262baba0bd7fd1e3611913fa656d6",
+      "references/official-index.md": "cdd783d6b41a0672f9c81f455e2b9ffb3a5a487264a96fd1db718d53dddb80c3",
+      "references/order-lifecycle.md": "f8cd2eb27de8c670cdce575476995a2946a8adc079d7f91f342ff7274932b56e",
+      "references/orders.md": "ec8f1cdb8b53f87c6a05ca9c397475e1c23db6e00a88508ff046e4e47dd0cac6",
+      "references/overseas-futures.md": "2dae25cf9260448722cc5b0ce98862b615c10403ca1a610c3fd49ce9a2dcd0ce",
+      "references/practical-development.md": "890a563fcb478f709457a08037b4ca90abca4e5ba65eb3bfee6f89f6c2a974e5",
+      "references/quote-events.md": "8316e4198016bb42949b3cf9f239a2b63facb78c3071e6a22a7e344d5cc95171",
+      "references/quotes.md": "0a4125e174503956eb799c37a430407e04976d1f1c886ff0b02c473956e0bcaf",
+      "references/session.md": "cd0a9c580ce6988d426d34d1d8c9487ea7f5dce9a6de738137d306081ca8f3f5",
+      "references/technical-notes.md": "fdf14ec91db4f83d513eb6ec10913f3158428ab0823b681b913048cecc2b76b7",
+      "references/testing-and-replay.md": "27a37467ab4e48384fba8b76eed865541b08bce6957f00a36e7f99cf09a3495e",
+      "references/trading-uiux.md": "d52fa981a196bdaa74fe94adb4874221fe5df75d99d5a28daf59095fb77a1d48",
+      "references/us-order-diagnostics.md": "49672cea78916d39659144794b8daf7f72ae7bbf980de98f3f957ed512c2bc03",
+      "references/us-stocks.md": "7ca7c4167744e2e66e1f637932f7db6f520a007f3e09c770f3371f04e8a92a04",
+      "references/web-oco-application.md": "a389ffd7fc26c25e2ed94373051e778db26a7450967ff29fbd32bcda77519d67",
+      "examples/practical_cases.py": "3566e4c69293fdb367ff22d2cf0c20a22221bf154d63ae96d0d8271000e349fb",
+      "examples/test_practical_cases.py": "0ddea9612a785f0b4669344d7f4a8bda745a4dc281bf85d20529dfa87625a4c6"
+    },
+    "input_scope": [
+      "SKILL.md",
+      "references/**/*.md",
+      "examples/*.py"
+    ]
+  },
+  "excluded_from_both": [
+    "evals/",
+    "README.md",
+    "agents/",
+    "assets/"
+  ],
+  "questions_provided_separately": true,
+  "expected_answers_provided": false,
+  "final_changed_files": {
+    "SKILL.md": {
+      "evaluated": "1a2c5a5a26ee5d9fcefa38960a9bee41faf604cb15c3fc6b0c96acbb4b467155",
+      "final": "fcdcef0fbfe72375977ba70e0f2db34e7d99b492ffb5629d7923d18b8b809842"
+    },
+    "references/application-state-models.md": {
+      "evaluated": "2442c5a6d1560a0efcbe936433392f842bff78ccdf285f878ca8ff6dc0a8f3f4",
+      "final": "b7538e0c7d309739b95c3585b3c15a5c18e5fd2ddaf737a613cf426be74d9cb2"
+    },
+    "references/cases/observe-before-eligibility.md": {
+      "evaluated": "308c8fc791cc8a33ab18e0a64fcafe9e9ea975de76419c8a0ad014b6b7a0e049",
+      "final": "a46bfe02bf2e2ae6cd20836009c539d527ecce188e4362476248b4986738dcb6"
+    },
+    "references/cases/oco-cancel-late-fill.md": {
+      "evaluated": "bfc3232bd09c8b2949678ae94f76c8e7b257b780143c12ae04bd2a096b6e0318",
+      "final": "76c367fa0e374d6cd2791e9d3b4823c81e94cd426d3829e4f6ec94b29821eb7d"
+    },
+    "references/cases/us-delayed-identity.md": {
+      "evaluated": "01136a08b099aa94c3cebb05b0858ce15fb5a19f8aa5af6ccd9a687e32084d3f",
+      "final": "891b3aac16d1b1d234fafd0016d006dde3228aaff1bbcb9777de824674e27084"
+    },
+    "references/frontend-evolution.md": {
+      "evaluated": "e87493460c3824714534249da2d4402d274145ff5105baecd09a0f50a069a800",
+      "final": "ccf9f75ea91ec70c40cbf351d88c58666f60eadd47d979094601b5a0f842753b"
+    },
+    "references/human-agent-development.md": {
+      "evaluated": "43440420674957940670f6fa9842422a7b0536c6f7524a4c99e181e4b0069856",
+      "final": "340cefe58d69d15260c9025a79723355fc8454452f9aedaa2d41076c56627706"
+    },
+    "references/testing-and-replay.md": {
+      "evaluated": "27a37467ab4e48384fba8b76eed865541b08bce6957f00a36e7f99cf09a3495e",
+      "final": "3501b9cc226abc6d4dbb8b96c6240c94aa4bee3e72623406dfdf4f3c97f28f42"
+    },
+    "examples/practical_cases.py": {
+      "evaluated": "3566e4c69293fdb367ff22d2cf0c20a22221bf154d63ae96d0d8271000e349fb",
+      "final": "e54300f7e717b4c4170c1b13ad877dfd5eacd4fcce0b1c414efec42b2d7d6eea"
+    },
+    "examples/test_practical_cases.py": {
+      "evaluated": "0ddea9612a785f0b4669344d7f4a8bda745a4dc281bf85d20529dfa87625a4c6",
+      "final": "a1f7675d5acce542d23f20e81461af9c1f8dfc5b3ac2d59631489939f0644c69"
+    }
+  },
+  "final_file_sha256": {
+    "SKILL.md": "fcdcef0fbfe72375977ba70e0f2db34e7d99b492ffb5629d7923d18b8b809842",
+    "references/accounts.md": "5334a40f2aa937c37789ee24c1e446b9650acce09b20e66ca3c9deaff0bf401e",
+    "references/application-state-models.md": "b7538e0c7d309739b95c3585b3c15a5c18e5fd2ddaf737a613cf426be74d9cb2",
+    "references/cases/observe-before-eligibility.md": "a46bfe02bf2e2ae6cd20836009c539d527ecce188e4362476248b4986738dcb6",
+    "references/cases/oco-cancel-late-fill.md": "76c367fa0e374d6cd2791e9d3b4823c81e94cd426d3829e4f6ec94b29821eb7d",
+    "references/cases/us-delayed-identity.md": "891b3aac16d1b1d234fafd0016d006dde3228aaff1bbcb9777de824674e27084",
+    "references/data-and-backtest.md": "4061404e0f9b29b533e401abc6ae8f59b6dc577b972ffc7b15778f6070abad28",
+    "references/diagnostics-support.md": "5bdf8394ce02028aefd2d48da8aaa64bd861584f79b054ad2c462a1505006f70",
+    "references/domestic-futures.md": "8585694bb348a2f815bff087210643b9aafd8f8f2b2b5a190fccbc9e51412fd5",
+    "references/frontend-evolution.md": "ccf9f75ea91ec70c40cbf351d88c58666f60eadd47d979094601b5a0f842753b",
+    "references/human-agent-development.md": "340cefe58d69d15260c9025a79723355fc8454452f9aedaa2d41076c56627706",
+    "references/manual-baseline.md": "74e8345c018a55b868bd23c32dffb7fb30c262baba0bd7fd1e3611913fa656d6",
+    "references/official-index.md": "cdd783d6b41a0672f9c81f455e2b9ffb3a5a487264a96fd1db718d53dddb80c3",
+    "references/order-lifecycle.md": "f8cd2eb27de8c670cdce575476995a2946a8adc079d7f91f342ff7274932b56e",
+    "references/orders.md": "ec8f1cdb8b53f87c6a05ca9c397475e1c23db6e00a88508ff046e4e47dd0cac6",
+    "references/overseas-futures.md": "2dae25cf9260448722cc5b0ce98862b615c10403ca1a610c3fd49ce9a2dcd0ce",
+    "references/practical-development.md": "890a563fcb478f709457a08037b4ca90abca4e5ba65eb3bfee6f89f6c2a974e5",
+    "references/quote-events.md": "8316e4198016bb42949b3cf9f239a2b63facb78c3071e6a22a7e344d5cc95171",
+    "references/quotes.md": "0a4125e174503956eb799c37a430407e04976d1f1c886ff0b02c473956e0bcaf",
+    "references/session.md": "cd0a9c580ce6988d426d34d1d8c9487ea7f5dce9a6de738137d306081ca8f3f5",
+    "references/technical-notes.md": "fdf14ec91db4f83d513eb6ec10913f3158428ab0823b681b913048cecc2b76b7",
+    "references/testing-and-replay.md": "3501b9cc226abc6d4dbb8b96c6240c94aa4bee3e72623406dfdf4f3c97f28f42",
+    "references/trading-uiux.md": "d52fa981a196bdaa74fe94adb4874221fe5df75d99d5a28daf59095fb77a1d48",
+    "references/us-order-diagnostics.md": "49672cea78916d39659144794b8daf7f72ae7bbf980de98f3f957ed512c2bc03",
+    "references/us-stocks.md": "7ca7c4167744e2e66e1f637932f7db6f520a007f3e09c770f3371f04e8a92a04",
+    "references/web-oco-application.md": "a389ffd7fc26c25e2ed94373051e778db26a7450967ff29fbd32bcda77519d67",
+    "examples/practical_cases.py": "e54300f7e717b4c4170c1b13ad877dfd5eacd4fcce0b1c414efec42b2d7d6eea",
+    "examples/test_practical_cases.py": "a1f7675d5acce542d23f20e81461af9c1f8dfc5b3ac2d59631489939f0644c69"
+  },
+  "final_native_behavioral_reevaluation": false,
+  "final_verification": "19 synthetic model tests; seven reconstructed guard defects caught; no broker operations"
+}

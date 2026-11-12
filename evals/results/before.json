@@ -1,0 +1,142 @@
+{
+  "answers": [
+    {
+      "id": "delayed-identity",
+      "answer": {
+        "retain_returned_trade": true,
+        "automatically_resubmit": false,
+        "treat_empty_id_as_not_sent": false,
+        "mark_filled_now": false
+      },
+      "reason": "保留可變 Trade 與 intent，依可靠識別補綁並持續查核；逾時不代表未送達，也沒有成交證據。",
+      "references": [
+        "SKILL.md",
+        "references/us-order-diagnostics.md"
+      ]
+    },
+    {
+      "id": "cancel-late-fill",
+      "answer": {
+        "exit_before_cancel_terminal": false,
+        "exit_quantity_shares": 1500,
+        "repeat_cancel_on_timeout": false,
+        "discard_late_fill": false
+      },
+      "reason": "等待撤單終態並納入晚到成交；累計與明細一致後，在已知條件成立時出場 1500 股，未知撤單不重送。",
+      "references": [
+        "references/web-oco-application.md"
+      ]
+    },
+    {
+      "id": "reference-missing",
+      "answer": {
+        "booked_shares": 1000,
+        "position_visible": true,
+        "continue_observation": true,
+        "automatic_exit_allowed": false,
+        "erase_fill_when_reference_missing": false
+      },
+      "reason": "有效成交依 execution ID 去重後保留並顯示，參考資料故障不抹除成交或停止觀察；缺少安全出場依據時暫停自動出場。",
+      "references": [
+        "references/trading-uiux.md",
+        "references/web-oco-application.md"
+      ]
+    },
+    {
+      "id": "command-outcome",
+      "answer": {
+        "first_outcome": "已提交，發布快照失敗",
+        "second_outcome": "尚未開始，未執行",
+        "automatically_retry_first": false
+      },
+      "reason": "第一筆 transaction 已提交，發布失敗不能回推為未執行；查詢持久狀態並恢復快照。第二筆尚未開始，應明確回報未執行。",
+      "references": [
+        "references/web-oco-application.md"
+      ]
+    },
+    {
+      "id": "preserve-position-policy",
+      "answer": {
+        "unit_count": 2,
+        "merge_without_user_decision": false,
+        "replace_policy_because_reference_does_it": false
+      },
+      "reason": "已確認每個進場 OrderNo 一個 unit，A、B 應分開；範例及工程師偏好不能覆蓋需求。",
+      "references": [
+        "SKILL.md",
+        "references/web-oco-application.md"
+      ]
+    },
+    {
+      "id": "guard-purpose",
+      "answer": {
+        "reject_only_due_to_update_date": false,
+        "block_all_report_collection": false,
+        "invent_an_effective_date_field": false,
+        "validate_actual_applicable_rules": true
+      },
+      "reason": "更新時間不等於規則生效日；驗證當日實際適用規則與資格，並讓成交回報持續收集。",
+      "references": [
+        "SKILL.md",
+        "references/accounts.md"
+      ]
+    },
+    {
+      "id": "original-interface-demo",
+      "answer": {
+        "reuse_maintained_ui_controls": true,
+        "isolated_fake_transport": true,
+        "verify_real_dom_interaction": true,
+        "allow_demo_to_modify_live_ledger": false
+      },
+      "reason": "沿用工作台實際控制項並以隔離假券商與獨立資料庫展示，操作真實 DOM 驗證流程，不碰正式帳本。",
+      "references": [
+        "references/trading-uiux.md",
+        "references/web-oco-application.md"
+      ]
+    },
+    {
+      "id": "workflow-recovery",
+      "answer": {
+        "login_alone_completes_recovery": false,
+        "require_duplicate_user_permission": false,
+        "restore_callbacks_subscriptions_and_reconcile": true,
+        "resume_A_after_requirements_met": true,
+        "resume_user_stopped_B": false,
+        "reset_remaining_budget": false
+      },
+      "reason": "重登只是第一步；恢復回呼、訂閱、新鮮行情及對帳後依原授權恢復 A，保留 B 的停止與剩餘額度 7。",
+      "references": [
+        "SKILL.md",
+        "references/trading-uiux.md"
+      ]
+    },
+    {
+      "id": "small-script-control",
+      "answer": {
+        "require_full_state_inventory": false,
+        "require_workbench_ui": false,
+        "require_new_service_or_persistent_wal": false
+      },
+      "reason": "單次已選帳庫存查詢可直接呼叫公開 Account 查詢並回傳結果，無須工作台或常駐架構。",
+      "references": [
+        "SKILL.md",
+        "references/accounts.md"
+      ]
+    },
+    {
+      "id": "conflicting-execution",
+      "answer": {
+        "silently_rewrite_original_cost": false,
+        "book_as_additional_fill": false,
+        "isolate_affected_symbol": true,
+        "continue_confirmed_unaffected_symbol": true
+      },
+      "reason": "同一成交鍵量價衝突且無可靠版本，保留原始事實與差異並查核，不重複入帳；隔離 A，無共用不確定性的 B 可繼續。",
+      "references": [
+        "references/us-order-diagnostics.md",
+        "references/trading-uiux.md"
+      ]
+    }
+  ]
+}

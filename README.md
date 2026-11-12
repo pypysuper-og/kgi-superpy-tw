@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0f766e" alt="MIT 授權"></a>
-  <img src="https://img.shields.io/badge/Skill-1.37.15-0891b2" alt="Skill 版本 1.37.15">
+  <img src="https://img.shields.io/badge/Skill-1.37.16-0891b2" alt="Skill 版本 1.37.16">
   <img src="https://img.shields.io/badge/社群貢獻-非官方-475569" alt="非官方社群貢獻">
   <img src="https://img.shields.io/badge/README-繁體中文-0f766e" alt="繁體中文 README">
 </p>
@@ -43,7 +43,13 @@
 
 > 本專案由社群整理與維護，未受凱基官方背書。這是一套給 AI 助手使用的指引與參考文件；SuperPy SDK、券商服務與開通資格仍由官方提供。安裝 Skill 本身不會連線券商或執行交易。
 
-本版補上官方清單中的[含加權／櫃買指數歷史分 K](references/data-and-backtest.md#taiwan-indices-dataset-and-symbol-boundaries)，整理 Data 代碼、Quote 商品與 MSMP 表名的差異。2026-11-02 的 SDK 2.1.2 測試已取得 Y9999／OTC99 歷史日 K；最後交易日分 K 對兩個指數回空表，歷史分 K 則連股票對照都遭存取拒絕。各項結果保留版本與條件，避免推成所有指數資料都不支援，或承諾已驗證即時訂閱。
+本版加入[台美股串接開發實務](references/practical-development.md)：把狀態機結構、模組責任與互動連到三個完整案例，附上不連券商的 Python 合成範例。[實務工程夥伴](references/human-agent-development.md)將具體開發互動提煉成背景判斷線索，幫助 AI 在重要時刻追問 guard 的目的、保留交易事實、確認恢復後的真正功能，並維持當下開發者的決策權。
+
+另整理[前端介面演進](references/frontend-evolution.md)，比較網格設定與部位監控的資訊架構、非同步回饋、泡泡／列表、原介面展示與驗證方法。這是首版設計參考，不是可直接啟動的 UI 模板；[前後測方法與實際限制](evals/evaluation.md)獨立記錄。
+
+離線教學模型已有 **19 項測試通過**，七種刻意破壞的 guard 也都被對應測試攔下。十題前後測按工程語意判讀，舊版與首次候選皆為 **40/40**，這組題目沒有量到正確率提升；後續修正、受測快照身分及證據限制保留在評估紀錄。公開內容採一般化經驗與合成案例，不附原始 sessions、私人交易回報、資料庫、帳密或憑證。
+
+既有[含加權／櫃買指數歷史分 K](references/data-and-backtest.md#taiwan-indices-dataset-and-symbol-boundaries)仍整理 Data 代碼、Quote 商品與 MSMP 表名的差異。2026-11-02 的 SDK 2.1.2 測試已取得 Y9999／OTC99 歷史日 K；最後交易日分 K 對兩個指數回空表，歷史分 K 則連股票對照都遭存取拒絕。各項結果保留版本與條件，避免推成所有指數資料都不支援，或承諾已驗證即時訂閱。
 
 既有[台股交易與帳務查詢流程](references/session.md#tw-workflow)及[同業 API 對照與技術筆記](references/technical-notes.md)持續提供官方功能連結、繁中 HTML／PDF 與 Python 範例；HTML 流程圖節點連到對應內容，要求 PDF 時保留並檢查頁內跳轉。
 
@@ -70,6 +76,8 @@ Skill 的作用是提供更有依據的開發脈絡；實際程式仍需依你�
 ### 1. 把 Skill 加入你的 AI 開發環境
 
 本 repo 根目錄就是完整的 `kgi-superpy-tw` Skill，包含 `SKILL.md`、`references/` 與 Codex 顯示設定。
+
+**下載固定版本**：[v1.37.16 Skill ZIP](https://github.com/pypysuper-og/kgi-superpy-tw/releases/download/v1.37.16/kgi-superpy-tw-v1.37.16.zip) · [SHA-256](https://github.com/pypysuper-og/kgi-superpy-tw/releases/download/v1.37.16/kgi-superpy-tw-v1.37.16.zip.sha256) · [版本說明](https://github.com/pypysuper-og/kgi-superpy-tw/releases/tag/v1.37.16)。ZIP 解壓後的 `kgi-superpy-tw/` 是完整 skill；依使用工具的安裝方式放置，更新前先保留既有版本及本機修改。
 
 **在 Codex 對話中安裝**
 
@@ -213,6 +221,10 @@ python -m pip install kgisuperpy
 | 同業功能對照、繁中 HTML／PDF 技術筆記 | [API 對照與技術筆記](references/technical-notes.md) |
 | 通用交易介面、策略狀態與操作回饋 | [交易應用 UIUX 指南](references/trading-uiux.md) |
 | 本機交易工具與可追查紀錄 | [Web OCO 設計參考](references/web-oco-application.md) · [診斷與支援](references/diagnostics-support.md) |
+| 狀態結構、模組對應與三個開發案例 | [串接開發實務](references/practical-development.md) · [狀態與模組協作](references/application-state-models.md) |
+| AI 協作中的假設、意圖與工程建議 | [實務工程夥伴](references/human-agent-development.md) |
+| 網格與泡泡介面的演進與設計取捨 | [前端介面演進](references/frontend-evolution.md) |
+| 離線範例、事件重播與 skill 前後測 | [測試與重播](references/testing-and-replay.md) · [實際評估](evals/evaluation.md) |
 | 文件版本、矛盾與來源 | [手冊基準](references/manual-baseline.md) · [官方連結索引](references/official-index.md) |
 
 README 與使用情境採繁體中文；部分技術參考採英文，保留 API 拼字與欄位名稱，方便助手查閱及程式對照。你仍可要求助手全程以繁體中文解釋。
@@ -221,7 +233,7 @@ README 與使用情境採繁體中文；部分技術參考採英文，保留 API
 
 既有指南包含台股整張／盤中零股的行情與委託隔離，以及 Windows 本機 Web 隱藏啟動：不常駐 CMD／PowerShell 視窗，保留登入輸出、稽核與啟動失敗提示。Web 指南延續六項 UX 契約：功能收納、登入／結束、連線／重連、就地說明、完整稽核，以及訂閱後的最新成交價展示。提供設計與驗證建議，不附已完成訂閱整合的 Web 程式。
 
-- **Skill 版本：`1.37.15`。** 本版補充台股指數資料集與代碼邊界，以及分開判讀歷史資料、最後交易日分 K 和 Quote 訂閱的實測依據。文件基準仍為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
+- **Skill 版本：`1.37.16`。** 本版增加台美股開發實務、狀態／模組協作、三個離線案例、工程夥伴及前端演進參考。這些新增材料不構成期貨實務案例庫。文件基準仍為《凱基 Python API 使用手冊 v1.37》；其中版本紀錄涵蓋 SDK `V2.1.2`。Skill、手冊、SDK 是三種不同版本，詳見 [來源與差異](references/manual-baseline.md)。
 - **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
 - **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
 - **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。

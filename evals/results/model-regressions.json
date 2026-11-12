@@ -1,0 +1,69 @@
+{
+  "model_sha256": "e54300f7e717b4c4170c1b13ad877dfd5eacd4fcce0b1c414efec42b2d7d6eea",
+  "tests_sha256": "a1f7675d5acce542d23f20e81461af9c1f8dfc5b3ac2d59631489939f0644c69",
+  "reconstructed_variants": [
+    {
+      "variant": "empty-identifiers",
+      "test": "test_empty_return_and_report_identifiers_do_not_match_each_other",
+      "tests_run": 1,
+      "caught": true,
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "variant": "untriggered-exit",
+      "test": "test_untriggered_position_cannot_exit",
+      "tests_run": 1,
+      "caught": true,
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "variant": "exact-available-boundary",
+      "test": "test_late_fill_is_included_and_exit_is_not_repeated",
+      "tests_run": 1,
+      "caught": true,
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "variant": "reference-availability",
+      "test": "test_zero_position_and_insufficient_availability_do_not_make_a_plan",
+      "tests_run": 1,
+      "caught": true,
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "variant": "reference-zero-position",
+      "test": "test_zero_position_and_insufficient_availability_do_not_make_a_plan",
+      "tests_run": 1,
+      "caught": true,
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "variant": "full-entry-remaining",
+      "test": "test_full_entry_needs_no_cancel_and_exits_after_terminal",
+      "tests_run": 1,
+      "caught": true,
+      "failures": 1,
+      "errors": 0
+    },
+    {
+      "variant": "implicit-authorization-defaults",
+      "test": "test_exit_requires_explicit_guard_inputs",
+      "tests_run": 1,
+      "caught": true,
+      "failures": 1,
+      "errors": 0
+    }
+  ],
+  "all_seven_caught": true,
+  "pre_advice_educational_model_sha256": "3566e4c69293fdb367ff22d2cf0c20a22221bf154d63ae96d0d8271000e349fb",
+  "pre_advice_observation": {
+    "full_entry_cancel_calls": 1,
+    "exit_with_omitted_authority_and_freshness": 2000
+  },
+  "scope": "Synthetic teaching models only; not historical broker applications"
+}

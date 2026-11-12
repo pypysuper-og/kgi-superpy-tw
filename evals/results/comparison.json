@@ -1,0 +1,49 @@
+{
+  "question_sha256": "e5c8b2442d3771ee6a60332a0ad5c14d87abf15df1690a472abf2fcd338dc6ce",
+  "rubric_sha256": "457ac2039bda633f1664e6d8ab5ed6778af29a81cb42e6a586bab5b6d4c0fd00",
+  "model": "gpt-6.1-terra",
+  "effort": "high",
+  "paired_trials": 1,
+  "arms": {
+    "before": {
+      "response_sha256": "6f02eff5aca73196e3b3dd57e91699de79321341f0848bd0e4b243401ed7647b",
+      "exact_label_cases": 9,
+      "exact_label_decisions": 38,
+      "referenced_files": 5,
+      "references": [
+        "SKILL.md",
+        "references/accounts.md",
+        "references/trading-uiux.md",
+        "references/us-order-diagnostics.md",
+        "references/web-oco-application.md"
+      ]
+    },
+    "after": {
+      "response_sha256": "01f51360af41e99bb0c6f4ab097ddac9f55c06c5b5c3075de2ce92e99684c71d",
+      "exact_label_cases": 10,
+      "exact_label_decisions": 40,
+      "referenced_files": 7,
+      "references": [
+        "SKILL.md",
+        "references/application-state-models.md",
+        "references/cases/observe-before-eligibility.md",
+        "references/cases/oco-cancel-late-fill.md",
+        "references/cases/us-delayed-identity.md",
+        "references/frontend-evolution.md",
+        "references/human-agent-development.md"
+      ]
+    }
+  },
+  "semantic_adjudication": {
+    "before_decisions": 40,
+    "after_decisions": 40,
+    "total": 40,
+    "automated_label_mismatches": [
+      "command-outcome.first_outcome",
+      "command-outcome.second_outcome"
+    ],
+    "rationale": "The baseline says the first transaction committed and must not be replayed; the second never started. Its free-form labels differ from the fixed aliases. Count this as equal engineering behavior, not an improvement."
+  },
+  "skill_snapshots": "skill-snapshots.json",
+  "evaluated_candidate": "first evaluated candidate; later corrections are listed separately"
+}

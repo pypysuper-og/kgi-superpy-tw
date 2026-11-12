@@ -1,8 +1,8 @@
 ---
 name: kgi-superpy-tw
-description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations and trading application UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Compare other brokerage APIs with SuperPy and create concise technical notes with Python examples and HTML/PDF when requested. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API, API capability comparisons, and related trading workflows; not for unrelated UI design, general broker rankings, or strategy profitability advice.
+description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations, application state/module interactions, and trading UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use practical cases and human-agent engineering guidance, compare brokerage APIs, and create technical notes when requested. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API and related trading workflows; not for unrelated UI design, general broker rankings, or strategy profitability advice.
 metadata:
-  version: "1.37.15"
+  version: "1.37.16"
 ---
 
 # KGI SuperPy API
@@ -25,6 +25,10 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 - Installation, eligibility, CA, simulation, login, account selection and logout: [session](references/session.md). For Taiwan startup, usage-flow diagrams or workflow reference notes, read its [Taiwan workflow](references/session.md#tw-workflow): separate account inspection from account selection, account queries from trading callbacks, and normal use from reconnect/logout.
 - Designing or improving a SuperPy Web UI or trading workbench: [trading application UX](references/trading-uiux.md). Start with fixed workspace and tabs/dialogs, login and shutdown journeys, distinct connection/account indicators and reconnect feedback, contextual help dialogs, auditable operations, and dynamic latest-trade display when login and subscriptions are available. Treat colors, typography and example geometry as replaceable styling; preserve the user's strategy, execution policy and platform. A small API script does not need a workbench.
 - Implementing OCO-specific persistent units, inventory reconciliation or reminder behavior in a local Web application: [Web OCO application example](references/web-oco-application.md). Its OCO and execution rules are examples, not defaults for other strategies or official SDK contracts; shared login, shutdown and layout requirements live in the UX guide.
+- Substantive application design, state ownership, cross-module interactions, or a practical failure case: [practical development index](references/practical-development.md) and its [state/module model](references/application-state-models.md). Select only the relevant case: [delayed US identity](references/cases/us-delayed-identity.md), [cancel with late fill](references/cases/oco-cancel-late-fill.md), or [observation before exit eligibility](references/cases/observe-before-eligibility.md). These are application patterns and synthetic seams, not new SDK contracts.
+- When a material assumption, product intention or verification decision needs a useful engineering second look: [human-agent development partner](references/human-agent-development.md). Its questions support the current developer's decisions; a short script or mechanical edit keeps its direct path.
+- Frontend design choices and their evolution across grid and position-monitoring examples: [frontend evolution](references/frontend-evolution.md), alongside the existing UX contracts. Use it for progressive disclosure, asynchronous progress, bubble/list projections, recovery messages and isolated original-UI demonstrations.
+- Choosing replay boundaries, interpreting synthetic versus live evidence, or evaluating skill changes: [testing and replay](references/testing-and-replay.md). The first edition includes offline teaching models and a fixed decision benchmark; neither certifies a trading application.
 - Correlated operation/result logs, hidden-launch diagnostics, support bundles and agent troubleshooting: [diagnostics and support](references/diagnostics-support.md).
 - Taiwan acknowledgement latency, pending-only diagnosis and SDK logging: [order lifecycle](references/order-lifecycle.md). Historical cases and field mappings are Taiwan-specific.
 - US sub-brokerage missing identifiers, empty cache states, rejection scenarios, automatic/manual reconciliation, fill-time quality, settlement changes, cancellation confirmation and explicit user retries: [US order diagnostics](references/us-order-diagnostics.md). Distinguish callback, SDK cache, broker reports and the application's ledger; read this reference for callback-driven Trade updates and why no source is unconditionally the newest.
@@ -36,6 +40,17 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 - Original Taiwan website links for refresh: [official index](references/official-index.md).
 
 Answer in the user's language while preserving API spelling and dataset names exactly. Consult the baseline when a signature, enum, version or example conflicts.
+
+## Practical engineering partner
+
+For material SuperPy design, debugging and acceptance decisions, quietly apply these case-derived prompts within the current work; surface a short suggestion when it changes the next useful action:
+
+- Start from the intended user result and the confirmed missing-data policy. Ask what a guard actually protects and whether its field is direct evidence. Preserve already confirmed fills; when continued observation is part of the agreed job, gate the new effects that depend on missing data. Establish the behavioral change and its existing authority before moving a guard; ask only if a material product or authority decision remains unresolved.
+- When facts conflict with presentation, an effect relies on indirect evidence, or a requested design crosses modules, locate the affected facts, intent, eligibility, effect progress and projection owners. Inspect only the quantities, reservations, time or generations that govern that transition, and preserve the developer's confirmed position/cost policy.
+- Follow the real input-to-result path and its continuation: reconnect must restore monitoring, and an operation demonstration must exercise maintained controls. Validate the cheapest meaningful counterexample and a valid continuation.
+- Prefer the smallest coherent change. Localize a safely identifiable conflict to its real dependents, retain shared-resource guards, and preserve existing authorization and user stops. A justified no-change decision is useful.
+
+Use these as situational judgment, not a mandatory checklist, persona impersonation, extra agent call, new approval loop or full state inventory. Ask only for material unresolved product/authority choices; investigate engineering facts directly. Details and example prompts are in the [development partner guide](references/human-agent-development.md).
 
 ## Development invariants
 
@@ -53,6 +68,8 @@ Answer in the user's language while preserving API spelling and dataset names ex
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
+
+Revision `1.37.16` adds a Taiwan/US practical edition covering state/module interactions, three complete case explanations with standard-library synthetic models, an implicit engineering-partner guide, frontend evolution patterns and a fixed before/after decision evaluation. Scope and evidence limits accompany each case. This is local development knowledge, not an SDK update, a trading application release or a live-broker certification; evaluation results are recorded separately in [the evaluation note](evals/evaluation.md).
 
 Revision `1.37.15` adds the publicly documented historical minute-bar dataset that includes Taiwan indices and separates Data symbols from Quote/Order products and MSMP tables. Dated SDK 2.1.2 observations confirm Y9999/OTC99 daily-history retrieval, distinguish empty latest-day index results from a nonempty stock control, and record historical-minute access denial for all tested symbols. Historical retrieval, latest-trading-day data and streaming subscriptions require separate evidence; these observations are not a general entitlement or service guarantee.
 

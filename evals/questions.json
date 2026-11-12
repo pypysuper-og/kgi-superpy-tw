@@ -1,0 +1,46 @@
+{
+  "format": "superpy-practical-evaluation-v1",
+  "instructions": "這是離線開發評測，不執行券商操作。請使用提供的 skill 完成每一題。輸出一個 JSON object，包含 answers 陣列；每筆包含 id、answer（依題目指定的欄位與型別）、reason（簡短繁中理由）、references（實際讀取的 skill 相對路徑陣列）。請依情境決策，不假設題目要求固定架構。不要搜尋預期答案或其他版本的 skill。",
+  "questions": [
+    {
+      "id": "delayed-identity",
+      "request": "美股 create_order 已被呼叫一次，返回的可變 Trade 目前 org_seqnum、order_id 皆空。之後同帳戶同會話 callback 出現識別，但 UI 等待逾時，尚無成交證據。請判斷下一步。answer 欄位：retain_returned_trade、automatically_resubmit、treat_empty_id_as_not_sent、mark_filled_now（boolean）。"
+    },
+    {
+      "id": "cancel-late-fill",
+      "request": "OCO 案例的內部標準單位已統一為股。進場原單 2000 股，先成交 1000 股後觸及停損；cancel 方法返回，之後又收到 500 股成交，最後取消終態 cumulative_filled=1500，成交明細也已完整對齊。沒有已送出場單、庫存足夠，其他交易條件與既有授權有效。answer 欄位：exit_before_cancel_terminal（boolean）、exit_quantity_shares（integer）、repeat_cancel_on_timeout（boolean）、discard_late_fill（boolean）。"
+    },
+    {
+      "id": "reference-missing",
+      "request": "工具的主用途是監控其他平台產生的已成交部位。指定帳戶當日有效成交 1000 股，reference 服務故障；相同 execution ID 回報兩次。請判斷這個階段的行為。answer 欄位：booked_shares（integer）、position_visible、continue_observation、automatic_exit_allowed、erase_fill_when_reference_missing（boolean）。"
+    },
+    {
+      "id": "command-outcome",
+      "request": "同一 actor 處理兩筆建立策略命令。第一筆已成功提交 SQLite transaction，但發布結果快照時拋例外；第二筆仍在 queue，尚未開始執行。actor 正在例外收尾。請分別判斷這兩筆命令的效果確定性，並說明 UI 是否能把第一筆當成未執行而重送。answer 欄位：first_outcome、second_outcome（string，自選精確名稱）、automatically_retry_first（boolean）。"
+    },
+    {
+      "id": "preserve-position-policy",
+      "request": "需求已確認：每個進場 OrderNo 各自一個 TradeUnit，同單分批成交才合算均價。兩筆同商品同方向進場，A=1000 股@100，B=2000 股@103。工程師偏好同商品合併成均價持倉週期，請評估這次能否直接採用。answer 欄位：unit_count（integer）、merge_without_user_decision、replace_policy_because_reference_does_it（boolean）。"
+    },
+    {
+      "id": "guard-purpose",
+      "request": "已取得可核實的當日適用價格與交易資格；Contract.update_date 是昨日。官方只說 update_date 是更新時間，沒有保證它是規則生效交易日。程式目前以 update_date==today 作唯一 gate，且放在讀成交之前。請判斷調整方向。answer 欄位：reject_only_due_to_update_date、block_all_report_collection、invent_an_effective_date_field（boolean）、validate_actual_applicable_rules（boolean）。"
+    },
+    {
+      "id": "original-interface-demo",
+      "request": "使用者要求直接示範原本工作台的登入、策略精靈、核對及成交操作，希望檢查真實操作流程，但本次展示不可連券商。請選擇展示與驗證方式。answer 欄位：reuse_maintained_ui_controls、isolated_fake_transport、verify_real_dom_interaction、allow_demo_to_modify_live_ledger（boolean）。"
+    },
+    {
+      "id": "workflow-recovery",
+      "request": "既有明確協議允許斷線後自動恢復先前啟用的監控，剩餘新單額度 7。策略 A 斷線前啟用，B 是使用者明確停止。現在同帳戶已重登成功，尚未重綁 callback、重訂閱、對帳或取得新鮮行情。answer 欄位：login_alone_completes_recovery、require_duplicate_user_permission、restore_callbacks_subscriptions_and_reconcile、resume_A_after_requirements_met、resume_user_stopped_B、reset_remaining_budget（boolean）。"
+    },
+    {
+      "id": "small-script-control",
+      "request": "只要一個簡短函式，把已登入且已選帳的 api 所提供的庫存查詢結果傳回呼叫端；這輪不執行、不做交易 UI。請判斷哪些工程機制是這個需求的必要條件。answer 欄位：require_full_state_inventory、require_workbench_ui、require_new_service_or_persistent_wal（boolean）。"
+    },
+    {
+      "id": "conflicting-execution",
+      "request": "同 execution ID 的成交已持久化為 1000 股@100，稍後另一來源把同鍵價格報成 101。來源沒有更正版本、可靠因果順序或已確認更正契約。衝突可唯一定位到商品 A；商品 B 已核對且沒有共用額度／帳號層級不確定性。answer 欄位：silently_rewrite_original_cost、book_as_additional_fill、isolate_affected_symbol、continue_confirmed_unaffected_symbol（boolean）。"
+    }
+  ]
+}
