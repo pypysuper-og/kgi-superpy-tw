@@ -11,6 +11,7 @@
 | 停損觸發、撤餘單，但又收到進場成交 | [撤單與晚到成交](cases/oco-cancel-late-fill.md) |
 | 外部成交已存在，參考資料卻不可用 | [先觀察入帳，再判斷出場資格](cases/observe-before-eligibility.md) |
 | 與 AI 協作，檢查假設、需求或驗收是否走偏 | [實務工程夥伴與人機協作](human-agent-development.md) |
+| 釐清平台能力、資料鏈、除錯、驗證或交付接點 | [串接工程工作流](integration-engineering-workflow.md)；依問題選讀，工具可按需採用 |
 | 設計交易前端，取捨表格、泡泡、精靈與通知 | [前端演進與設計方法](frontend-evolution.md)，操作契約沿用 [UIUX 指南](trading-uiux.md) |
 | 選測試層級、重播事件或判讀前後測 | [測試、重播與成效評估](testing-and-replay.md) |
 

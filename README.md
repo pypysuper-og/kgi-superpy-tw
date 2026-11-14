@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0f766e" alt="MIT 授權"></a>
-  <img src="https://img.shields.io/badge/Skill-1.37.17-0891b2" alt="Skill 版本 1.37.17">
+  <img src="https://img.shields.io/badge/Skill-1.38.0-0891b2" alt="Skill 版本 1.38.0">
   <img src="https://img.shields.io/badge/社群貢獻-非官方-475569" alt="非官方社群貢獻">
   <img src="https://img.shields.io/badge/README-繁體中文-0f766e" alt="繁體中文 README">
 </p>
@@ -35,7 +35,7 @@
 適合正在做這些事的你：
 
 - **第一次串接 SuperPy**：釐清安裝、憑證、登入、選帳號與登出的順序。
-- **用 AI 開發行情或交易工具**：從 API 依據、功能與模組分工，到符合使用習慣的操作介面。
+- **用 AI 開發行情或交易工具**：從需求、平台能力與資料流，到功能分工、驗證及操作介面。
 - **從台股擴展到美股或期貨**：先辨認市場差異，再處理委託、帳務與回報。
 - **維護既有 Python 專案**：借助實務案例，檢查委託追蹤、斷線恢復與畫面是否對得上實際狀態。
 
@@ -53,7 +53,7 @@
 | 功能各自正常，串起來卻接不上 | 用狀態機釐清模組分工、事件互動與恢復後應接續的功能 |
 | 畫面資訊很多，卻不知道現在能做什麼 | 從網格與泡泡介面的演進，整理資訊分層、操作回饋與監控視圖的 UIUX 思路 |
 
-與 AI 協作時，也多一份**實務工程夥伴**的思考：在重要的設計與排錯判斷中，提醒助手回頭檢查功能目的、必要假設與驗證方式。策略與取捨仍由你決定；實際程式仍需依你的 SDK 版本與環境驗證。
+與 AI 協作時，也多一份**實務工程夥伴**的思考：從需求與資料能力盤點，到除錯、驗證、恢復與交付，提醒助手檢查功能目的、必要假設及真正使用的流程，按情境選用工具與其他工程 skills。策略與取捨仍由你決定；實際程式仍需依你的 SDK 版本與環境驗證。
 
 <a id="quick-start"></a>
 
@@ -174,14 +174,14 @@ python -m pip install kgisuperpy
 | 本機交易工具與可追查紀錄 | [Web OCO 設計參考](references/web-oco-application.md) · [診斷與支援](references/diagnostics-support.md) |
 | 實務案例、狀態機與模組互動 | [串接開發實務](references/practical-development.md) · [狀態與模組協作](references/application-state-models.md) |
 | 交易介面與設計取捨 | [交易 UIUX 指南](references/trading-uiux.md) · [前端演進](references/frontend-evolution.md) |
-| 與 AI 一起釐清需求、檢查假設與驗證 | [實務工程夥伴](references/human-agent-development.md) |
+| 與 AI 釐清需求、除錯、驗證與交付 | [實務工程夥伴](references/human-agent-development.md) · [串接工程工作流](references/integration-engineering-workflow.md) |
 | 來源查證與適用範圍 | [來源與驗證](references/source-verification.md) · [官方連結索引](references/official-index.md) |
 
 README 與使用情境採繁體中文；部分技術參考採英文，保留 API 拼字與欄位名稱，方便助手查閱及程式對照。你仍可要求助手全程以繁體中文解釋。
 
 ## 版本與使用邊界
 
-- **Skill 版本：`1.37.17`。** Skill 與 SuperPy SDK 各自維護版本；功能依據與實際驗證範圍，詳見 [來源與驗證](references/source-verification.md)。
+- **Skill 版本：`1.38.0`。** Skill 與 SuperPy SDK 各自維護版本；功能依據與實際驗證範圍，詳見 [來源與驗證](references/source-verification.md)。
 - **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
 - **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
 - **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。
