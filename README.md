@@ -50,7 +50,7 @@
 | 把「方法回傳」誤當成「已成交」 | 結合單號晚到、撤單後仍收到成交等案例，釐清回報與實際結果 |
 | 跨市場時沿用錯誤假設 | 分開整理帳號選擇、數量單位、委託識別與改撤單語意 |
 | 發生問題，只剩一句「送單失敗」 | 提供操作關聯、狀態追蹤、敏感資訊遮蔽與診斷順序的設計參考 |
-| 功能各自正常，串起來卻接不上 | 用狀態機釐清模組分工、事件互動與恢復後應接續的功能 |
+| 功能各自正常，串起來卻接不上 | 追查 API 資料取得、更新與使用端，再以狀態機釐清模組互動與恢復 |
 | 畫面資訊很多，卻不知道現在能做什麼 | 從網格與泡泡介面的演進，整理資訊分層、操作回饋與監控視圖的 UIUX 思路 |
 
 與 AI 協作時，也多一份**實務工程夥伴**的思考：從需求與資料能力盤點，到除錯、驗證、恢復與交付，提醒助手檢查功能目的、必要假設及真正使用的流程，按情境選用工具與其他工程 skills。策略與取捨仍由你決定；實際程式仍需依你的 SDK 版本與環境驗證。
@@ -170,7 +170,7 @@ python -m pip install kgisuperpy
 | 方法返回、委託成功、成交的差別 | [委託生命週期與診斷](references/order-lifecycle.md) |
 | 美股、國內期權、海外期權 | [美股複委託](references/us-stocks.md) · [國內期權](references/domestic-futures.md) · [海外期權](references/overseas-futures.md) |
 | 行情訂閱、回呼、錯誤與恢復 | [行情](references/quotes.md) · [行情事件](references/quote-events.md) |
-| 歷史資料、MSMP 與回測 | [資料與回測](references/data-and-backtest.md) |
+| 當日商品資料、更新重試與回測 | [當日資料與操作檢查](references/taiwan-daily-rules.md) · [資料與回測](references/data-and-backtest.md) |
 | 本機交易工具與可追查紀錄 | [Web OCO 設計參考](references/web-oco-application.md) · [診斷與支援](references/diagnostics-support.md) |
 | 實務案例、狀態機與模組互動 | [串接開發實務](references/practical-development.md) · [狀態與模組協作](references/application-state-models.md) |
 | 交易介面與設計取捨 | [交易 UIUX 指南](references/trading-uiux.md) · [前端演進](references/frontend-evolution.md) |
@@ -181,7 +181,7 @@ README 與使用情境採繁體中文；部分技術參考採英文，保留 API
 
 ## 版本與使用邊界
 
-- **Skill 版本：`1.38.0`。** Skill 與 SuperPy SDK 各自維護版本；功能依據與實際驗證範圍，詳見 [來源與驗證](references/source-verification.md)。
+- **Skill 版本：`1.38.2`。** Skill 與 SuperPy SDK 各自維護版本；功能依據與實際驗證範圍，詳見 [來源與驗證](references/source-verification.md)。
 - **文件整理不等於實機相容性保證。** 參考文件中的歷史觀察有其版本與條件；要判斷目前行為，仍需核對官方資訊與你的安裝環境。
 - **正式登入與交易需要明確授權。** 登入的授權不包含下單；不因模擬環境不可用就改連正式環境。結果未知時先查核，不盲目重送。
 - **這是開發輔助，不提供投資建議或獲利承諾。** 自動交易與本機 OCO 的行為、失效條件及監控責任，須由實際應用清楚定義與驗證。

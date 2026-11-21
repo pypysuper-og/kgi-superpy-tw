@@ -36,6 +36,7 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 - Comparing another brokerage API with SuperPy, finding equivalent fields across multiple methods, or turning findings into technical notes: [API comparison and technical notes](references/technical-notes.md). Keep a comparison-only answer in chat; create HTML/PDF when requested. Reference notes use concise, descriptive Traditional Chinese, highlighted Python and official links; HTML flow nodes link to the relevant document sections, with PDF destinations checked after export.
 - Quote event enums, error codes and bounded recovery: [quote events](references/quote-events.md).
 - Historical data, Taiwan index dataset/symbol differences, MSMP conversion, freshness and backtesting: [data and backtest](references/data-and-backtest.md).
+- Taiwan daily product rules and price limits, an application-configured 08:00 refresh, per-resource retries or operation-specific checks: [daily data and operation guards](references/taiwan-daily-rules.md). Use the cache policy for agreed daily metadata and check live quotes and account state separately.
 - Source selection, version-specific evidence and unresolved contracts: [source verification](references/source-verification.md).
 - Original Taiwan website links for refresh: [official index](references/official-index.md).
 
@@ -69,7 +70,7 @@ Use these as situational judgment, not a mandatory checklist, persona impersonat
 
 ## Documentation baseline
 
-Revision `1.38.2` documents the same-day scope of U.S. `SubAccount.OrderReport()`, how to preserve unknown rejection reasons, and where to check previously saved records for older orders.
+Revision `1.38.2` documents the same-day scope of U.S. `SubAccount.OrderReport()`, how to preserve unknown rejection reasons, and where to check previously saved records for older orders. Taiwan guidance covers available daily-data APIs, an example 08:00 refresh policy, retries by resource, current credit limits, and reconciliation by order and execution identity. It identifies SDK 2.1.2 credit enums and the evidence needed before converting processed whole-lot quote quantities.
 
 Revision `1.38.0` extends the engineering partner with on-demand integration guidance for requirements, existing provider capabilities, data consumers, debugging, verification, recovery and delivery. Optional tool and skill selection preserves a direct path when those capabilities are absent or unnecessary. Twelve prospective evaluation cases cover the new decisions and non-trigger controls; they have not been run as an AI comparison. Existing historical scores apply only to their original candidates. This revision changes no SDK contract or brokerage authorization.
 

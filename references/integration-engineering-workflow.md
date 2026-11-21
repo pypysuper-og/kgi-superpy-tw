@@ -28,6 +28,8 @@ its meaning, unit, identity, target version, entitlement and effective time.
 Trace acquisition through normalization, cache, strategy and displayed result.
 A product catalog, configured URL or loader does not establish a fresh feed.
 
+For Taiwan daily product rules and price limits, use the scoped [daily acquisition and guard guide](taiwan-daily-rules.md): separate cacheable metadata from changing account/quote facts, preserve partial success, and check the consumer's actual dependency before blocking an operation.
+
 When a contract is uncertain, make the smallest authorized read-only or offline
 probe that can distinguish the alternatives. Keep unresolved facts local to the
 effects that depend on them. Never infer production permission from simulation

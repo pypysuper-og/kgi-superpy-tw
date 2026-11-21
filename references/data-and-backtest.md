@@ -2,6 +2,8 @@
 
 Use the public catalog links below and the target SDK to confirm dataset contracts. Dataset names, times and fee defaults in these notes are reference values, not current market-rule or freshness guarantees.
 
+For daily Taiwan product metadata and price-limit acquisition, read [daily data and operation guards](taiwan-daily-rules.md). It separates an agreed same-day cache/post-08:00 refresh policy from live quotes, account state and upstream publication schedules; do not impose a short TTL on all fields returned by a snapshot.
+
 The public Taiwan Data/MSMP catalogs were checked for the index-specific entries below on 2026-11-02. Runtime observations are labeled separately from those documented call shapes.
 
 ## Data

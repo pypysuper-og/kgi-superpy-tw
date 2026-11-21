@@ -28,6 +28,12 @@ api.Quote.unsubscribe_all()
 
 `set_cb_event` receives connection, subscription, timeout, backpressure, callback, and reconnect events. Check status codes against the target SDK and the public event page.
 
+### Versioned whole-lot units and independent book updates
+
+For ordinary Taiwan stocks using processed `Quote` with `odd_lot=False` in SDK 2.1.2, treating Tick `volume` and BidAsk volumes as lots is a working interpretation of the examples. The public callback fields give quantities without specifying shares or lots. TWSE defines the ordinary-stock trading unit as 1,000 shares. Before converting callback quantities to shares, confirm the unit for each target callback, market, lot mode and version. A quantity ending in 000 provides no evidence of its unit. Persist the verified mapping and recheck when the feed, SDK, callback version, security type or lot mode changes. Verify `SWQuote` and snapshot quantities independently. [Tick example](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/quoteSubscribeTick) · [BidAsk example](https://superpy.kgieworld.com.tw/kgipythonapi/guide/tw/quoteSubscribeBidAsk) · [TWSE trading units](https://www.twse.com.tw/zh/products/system/trading.html)
+
+Subscribe to both Tick and BidAsk when the strategy uses trade and book conditions. Track their timestamps and subscription status separately, and retry only the failed subscription. Show elapsed time since each update and use the strategy's freshness policy for each input. [Daily and live data](taiwan-daily-rules.md#daily-and-live-data)
+
 ### Index symbols need their own subscription evidence
 
 Data history, latest-trading-day Data and streaming Quote are separate surfaces. A Data symbol is not automatically a Quote product, and `Order.contract()` is not a complete catalog of all Data/index symbols. MSMP `TSE`/`OTC` are table names, not established subscription symbols.

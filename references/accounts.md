@@ -40,6 +40,7 @@ Key schema groups:
 - `OrderReport.OrderFunc`: I=new, C=quantity change, M=price change, D=cancel. `OrdLot`: 0=regular, 2=fixed price, 1=after-hours odd lot, 3=block, 4=intraday odd lot. These are report codes, not direct enum values.
 - Reconciliation fields include `OrderNo`, `TradeDate`, `CNT`, `CNTN`, `BeforeQty`, `AfterQty`, `BeforeQtyN`, `AfterQtyN`, `ClientOrderTime`, `ClientOrderTimeN`, `ReportTime`, `ReportTimeN`, `ErrCode`, `ErrMsg`. `PriceFlagN`: 1=market, 2=limit.
 - Empty reports, missing IDs and timeouts remain distinct from confirmed rejection. Do not infer a full order lifecycle from one report row.
+- Match each execution to its own `OrderNo` within the selected account, broker branch, trading day, market and lot mode. Preserve `MarketNoN` as the market execution identifier, including leading zeros as returned. Keep `CNTN` and callback operation sequences as separate fields. Verify symbol, side, class and cumulative quantity against the order and leave missing or conflicting identities unresolved. Retain the original executions when deriving FIFO positions. [Identity and position guards](taiwan-daily-rules.md#identity-and-effects)
 
 ## Official schema pages
 
