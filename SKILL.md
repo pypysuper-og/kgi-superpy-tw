@@ -2,7 +2,7 @@
 name: kgi-superpy-tw
 description: Develop, explain, review, and debug KGI SuperPy (kgisuperpy) integrations, application state/module interactions, and trading UI/UX for Taiwan stocks, US sub-brokerage, domestic futures/options, and overseas futures/options. Use practical cases and engineering guidance for requirements, capability discovery, debugging, verification and delivery; compare brokerage APIs and create technical notes when requested. Use for SuperPy, kgisuperpy, KGI Python API, 凱基 Python API and related trading workflows; not for unrelated UI design, general broker rankings, or strategy profitability advice.
 metadata:
-  version: "1.38.0"
+  version: "1.38.2"
 ---
 
 # KGI SuperPy API
@@ -31,7 +31,7 @@ All facade names are on `api`. Do not construct names by analogy. Read only the 
 - Choosing replay boundaries, interpreting synthetic versus live evidence, or evaluating skill changes: [testing and replay](references/testing-and-replay.md). The first edition includes offline teaching models and a fixed decision benchmark; neither certifies a trading application.
 - Correlated operation/result logs, hidden-launch diagnostics, support bundles and agent troubleshooting: [diagnostics and support](references/diagnostics-support.md).
 - Taiwan acknowledgement latency, pending-only diagnosis and SDK logging: [order lifecycle](references/order-lifecycle.md). Historical cases and field mappings are Taiwan-specific.
-- US sub-brokerage missing identifiers, empty cache states, rejection scenarios, automatic/manual reconciliation, fill-time quality, settlement changes, cancellation confirmation and explicit user retries: [US order diagnostics](references/us-order-diagnostics.md). Distinguish callback, SDK cache, broker reports and the application's ledger; read this reference for callback-driven Trade updates and why no source is unconditionally the newest.
+- US sub-brokerage missing identifiers, empty cache states, rejection scenarios, automatic/manual reconciliation, fill-time quality, settlement changes, cancellation confirmation and explicit user retries: [US order diagnostics](references/us-order-diagnostics.md). Distinguish callback, SDK cache, broker reports and the application's ledger; read this reference for callback-driven Trade updates, the same-day OrderReport scope and freshness limits.
 - Quote methods, payloads, subscription keys and quotas: [quotes](references/quotes.md).
 - Comparing another brokerage API with SuperPy, finding equivalent fields across multiple methods, or turning findings into technical notes: [API comparison and technical notes](references/technical-notes.md). Keep a comparison-only answer in chat; create HTML/PDF when requested. Reference notes use concise, descriptive Traditional Chinese, highlighted Python and official links; HTML flow nodes link to the relevant document sections, with PDF destinations checked after export.
 - Quote event enums, error codes and bounded recovery: [quote events](references/quote-events.md).
@@ -68,6 +68,8 @@ Use these as situational judgment, not a mandatory checklist, persona impersonat
 - Keep documented behavior, document contradictions, version-specific runtime evidence and user-confirmed experience separate. The one-day account-processing observation remains in [session](references/session.md). For a current/latest claim, verify the official source and installed version.
 
 ## Documentation baseline
+
+Revision `1.38.2` documents the same-day scope of U.S. `SubAccount.OrderReport()`, how to preserve unknown rejection reasons, and where to check previously saved records for older orders.
 
 Revision `1.38.0` extends the engineering partner with on-demand integration guidance for requirements, existing provider capabilities, data consumers, debugging, verification, recovery and delivery. Optional tool and skill selection preserves a direct path when those capabilities are absent or unnecessary. Twelve prospective evaluation cases cover the new decisions and non-trigger controls; they have not been run as an AI comparison. Existing historical scores apply only to their original candidates. This revision changes no SDK contract or brokerage authorization.
 

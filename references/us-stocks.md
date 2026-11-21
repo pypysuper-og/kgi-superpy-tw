@@ -64,6 +64,8 @@ Use `api.SubAccount` after selecting the intended sub-brokerage account. Validat
 | `OrderReport()` | None | `seqnum`, `orig_seqnum`, `orderno`, `qty`, `replace_qty`, `price`, `replace_price`, `order_err_code`, `order_err_msg`, `sales_status`, `sales_status_code`, `exe_qty`, `exe_status_code` |
 | `ExecReport()` | None | `orderno`, `symbol`, `trade_date`, `trade_type`, `exe_qty`, `exe_avg_price`, `exe_price`, `trade_currency`, `settle_currency` |
 
+[`SubAccount.OrderReport()`](https://superpy.kgieworld.com.tw/kgipythonapi/guide/us/accountOrderReport) returns the current day's latest US orders and executions. Filter its returned rows by `orig_seqnum`. For a missing original sequence or an older order, follow [US order diagnostics](us-order-diagnostics.md).
+
 Note the distinct spellings `org_seqnum` (order/event) and `orig_seqnum` (account report). Report `exe_status_code` is 0=unfilled, 1=partial, 2=filled; `sales_status_code` is 0=reserved, 1=forwarding, 2=accepted, 3=failed, 4=expired, 5=voided, 6=invalid, 7=processing, 8=sent to trading desk, 9=processing failed, 10=upstream processing. Preserve source values alongside any application mapping.
 
 Validate the units and meaning of `Qty` and `settle_currency` against the target SDK and actual return schema before calculations; field names alone do not establish them.
